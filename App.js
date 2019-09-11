@@ -25,6 +25,7 @@ import Support from './pages/support';
 import AddPlatform from './pages/addplatform';
 import Transfer from './pages/transfer';
 import About from './pages/about';
+import * as Font from 'expo-font';
 
 const MainDashBoard = createStackNavigator(
   {
@@ -127,6 +128,10 @@ const AppNavigator=(val)=> createSwitchNavigator({
 
 export default class App extends Component{
 
+  state = {
+    fontLoaded:false
+  }
+
   _storeData = async (key,val) => {
     try {
       await AsyncStorage.setItem(key, val);
@@ -135,11 +140,24 @@ export default class App extends Component{
     }
   };
 
+
+
+async componentDidMount() {
+   await Font.loadAsync({
+      GilroyExtraBold: require('./assets/fonts/Gilroy-ExtraBold.ttf'),
+      GilroyLight: require('./assets/fonts/Gilroy-Light.ttf'),
+      SF: require('./assets/fonts/SF.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
   
 
   render(){
     const MainNavigator=AppNavigator(this.state);
-    return <MainNavigator />;
+
+     return this.state.fontLoaded ? <MainNavigator /> : null
+   
   }
 }
 
