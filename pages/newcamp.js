@@ -1,6 +1,6 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet ,FlatList ,TouchableOpacity ,Image,ImageBackground} from "react-native";
-
+import * as Font from 'expo-font';
 
 import styles from './campStyle';
 import header from './headerStyle';

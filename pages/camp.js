@@ -1,7 +1,7 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl,CheckBox ,FlatList ,TouchableOpacity ,Image,ImageBackground,ActivityIndicator,AsyncStorage} from "react-native";
 
-
+import * as Font from 'expo-font';
 import styles from './campStyle';
 import header from './headerStyle';
 

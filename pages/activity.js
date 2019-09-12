@@ -1,13 +1,10 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
- 
+ import * as Font from 'expo-font';
 import styles from './activityStyle';
 import header from './headerStyle';
-
-
 
 
 const SummaryList = (props) => (
@@ -29,8 +26,8 @@ export default class Activity extends Component {
     this.state = {
         summary:[],
         total_earning:0,
-        count:0
-      
+        count:0,
+        fontLoaded:false
        
     };
 }
@@ -83,21 +80,25 @@ _onRefresh = () => {
       alert(error);
     }
   }
-  componentDidMount() {
-    this._getStorageValue();
-    Font.loadAsync({
+  async componentDidMount() {
+  
+    await Font.loadAsync({
       'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
       'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
       'SF': require('../assets/fonts/SF.ttf'),
     });
+     this.setState({ fontLoadedd:true });
+       this._getStorageValue();
   }
-
 
 
 
   render() {
   
       return (
+
+          this.state.fontLoadedd ? (
+
         <ScrollView style={[styles.container,{backgroundColor:'#fff'}]}
         refreshControl={
           <RefreshControl
@@ -161,7 +162,8 @@ _onRefresh = () => {
         
         </ScrollView>
         
-      );
+      ): null
+      )
     }
   }
 

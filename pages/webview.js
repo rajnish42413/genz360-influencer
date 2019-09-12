@@ -4,7 +4,7 @@ import {
   import Icon from 'react-native-vector-icons/FontAwesome5';
   import { WebView } from 'react-native-webview';
  
-
+import * as Font from 'expo-font';
 import styles from './loginStyle.js';
 
 export default class Web extends Component {

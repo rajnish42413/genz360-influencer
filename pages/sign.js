@@ -8,7 +8,7 @@ import DatePicker from 'react-native-datepicker';
 import styles from './loginStyle';
 import header from './headerStyle';
 // import Location from './newlocation';
-
+import * as Font from 'expo-font';
 import Location from './location'
 export default class INFLUENCERDETAILS extends Component {
 

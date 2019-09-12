@@ -1,6 +1,6 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet ,FlatList ,TouchableOpacity ,Image,AsyncStorage} from "react-native";
-
+import * as Font from 'expo-font';
 
 import styles from './notifStyle';
 

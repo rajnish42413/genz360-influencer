@@ -4,7 +4,7 @@ import {ScrollView, View, Text, TextInput,ActivityIndicator ,StyleSheet ,FlatLis
 
 import styles from './campStyle';
 import header from './headerStyle';
-
+import * as Font from 'expo-font';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 

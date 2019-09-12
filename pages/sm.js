@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View ,ScrollView,StyleSheet,Text,TouchableOpacity,TouchableWithoutFeedback} from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import Icon from 'react-native-vector-icons/MaterialIcons'
- 
+import * as Font from 'expo-font';
+
 icon = ({ name, size = 18, style }) => {
   // flatten the styles
   const flat = StyleSheet.flatten(style);

@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TextInput, StyleSheet, FlatList,RefreshControl,
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './dashstyle';
 import header from './headerStyle';
+import * as Font from 'expo-font';
 
 const Campaign = (props) => (
 

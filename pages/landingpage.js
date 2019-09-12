@@ -1,12 +1,9 @@
 import React , {Component} from 'react';
 import {ScrollView, View, Text, TextInput ,StyleSheet ,Dimensions,FlatList ,TouchableOpacity,ActivityIndicator,AsyncStorage ,Image ,CheckBox ,ImageBackground} from "react-native";
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
 import Sm from './sm';
-
 import header from './headerStyle';
-
+import * as Font from 'expo-font';
 import Swiper from 'react-native-swiper';
 
 
@@ -25,6 +22,7 @@ export default class Landingpage extends Component{
         this.state={
         
           current_screen:"",
+          fontLoadedd:false
         }
     }
 
@@ -75,18 +73,27 @@ export default class Landingpage extends Component{
         // Error saving data
       }
     };
-    componentWillMount(){
-      this.checkloginstatus();
-      this._getStorageValue();
-      Font.loadAsync({
+
+    async componentWillMount(){
+    
+
+      await Font.loadAsync({
         'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
         'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
         'SF': require('../assets/fonts/SF.ttf'),
       });
+      this.setState({ fontLoadedd:true });
+
+        this.checkloginstatus();
+        this._getStorageValue();
+
     }
 
     render(){
         return(
+
+       this.state.fontLoadedd ? (
+     
           <View style={{flex:1}}>
           <Swiper style={styles.wrapper} showsButtons={false} 
             dot={<View style={{backgroundColor:'rgba(255,255,255,1)', width: 8, height: 8,borderRadius: 4, 
@@ -135,7 +142,9 @@ export default class Landingpage extends Component{
         </TouchableOpacity> */}
         </View>
 
-        );
+        ):null
+
+       )
       
     }
 }

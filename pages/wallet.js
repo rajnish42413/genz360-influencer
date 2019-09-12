@@ -4,7 +4,7 @@ import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl ,FlatList ,
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './walletStyle';
 import Sm from './sm';
-
+import * as Font from 'expo-font';
 import header from './headerStyle';
 
 
@@ -43,7 +43,8 @@ export default class Wallet extends Component{
         super(props);
         this.state={
            amount:0,
-           transactions:[]
+           transactions:[],
+           fontLoaded:false
         };
     }
 
@@ -93,13 +94,14 @@ export default class Wallet extends Component{
           alert(error);
         }
       }
-      componentDidMount(){
-        this._getStorageValue();
-        Font.loadAsync({
+    async componentDidMount() {    
+      this._getStorageValue();
+        await Font.loadAsync({
           'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
           'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
           'SF': require('../assets/fonts/SF.ttf'),
         });
+           this.setState({ fontLoadedd:true });
       }
       
    
@@ -108,7 +110,7 @@ export default class Wallet extends Component{
     render(){
 
         return(
-
+   this.state.fontLoadedd ? (
 
         <ScrollView style={{flex:1,backgroundColor:'#fff'}}
         refreshControl={
@@ -177,7 +179,7 @@ export default class Wallet extends Component{
 
             </ScrollView>
         </ScrollView>
-
+        ):null
 
         );
     }

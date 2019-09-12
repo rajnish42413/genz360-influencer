@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Alert,Image ,Dimensions, TextInput ,TouchableOpacity,AsyncStorage,ActivityIndicator} from 'react-native';
   import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import * as Font from 'expo-font';
 import styles from './loginStyle.js';
 const windowHeight = Dimensions.get('window').height;
 const Loader=()=>(

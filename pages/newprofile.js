@@ -3,7 +3,7 @@ import {ScrollView,Alert, View, Text, TextInput ,StyleSheet ,FlatList ,Touchable
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
- 
+ import * as Font from 'expo-font';
 import styles from './profStyle2';
 import header from './headerStyle';
 

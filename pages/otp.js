@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image , TextInput ,TouchableOpacity} from 'react-native';
   import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import * as Font from 'expo-font';
 import styles from './loginStyle.js';
 
 export default class OTP extends Component {

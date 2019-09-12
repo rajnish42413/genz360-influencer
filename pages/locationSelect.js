@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import SearchableDropdown from 'react-native-searchable-dropdown';
+import * as Font from 'expo-font';
  
 var items = [
   {

@@ -2,7 +2,7 @@ import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Dimensions,AsyncStorage} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-
+import * as Font from 'expo-font';
  
 import styles from './dashstyle';
 import header from './headerStyle';

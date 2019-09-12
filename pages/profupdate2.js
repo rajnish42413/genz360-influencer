@@ -4,7 +4,7 @@ import {WebView} from 'react-native-webview'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './createStyle';
 import Sm from './sm';
-
+import * as Font from 'expo-font';
 import header from './headerStyle';
 
 
@@ -36,6 +36,7 @@ export default class ProfUpdate2 extends Component{
          instaverified:false,
          ytverified:false,
          twitterverified:false,
+          fontLoaded:false
         }
     }
 
@@ -109,14 +110,15 @@ export default class ProfUpdate2 extends Component{
         }
       }
       
-      componentDidMount(){
+       async componentDidMount() {    
         this._getStorageValue();
         this._storeData("current_screen","SMH");
-        Font.loadAsync({
+      await  Font.loadAsync({
           'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
           'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
           'SF': require('../assets/fonts/SF.ttf'),
         });
+         this.setState({ fontLoadedd:true });
       }
       
 
@@ -157,6 +159,7 @@ export default class ProfUpdate2 extends Component{
     render(){
 
         return(
+            this.state.fontLoadedd ? (
             <ScrollView style={{backgroundColor:'#fff'}}>
           <View style={header.header_wrapper}>
           <View style={header.wrap}>
@@ -402,6 +405,8 @@ export default class ProfUpdate2 extends Component{
      
    </View>
    </ScrollView>
+
+   ):null
         );
     }
 }

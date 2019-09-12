@@ -1,11 +1,10 @@
-
-
 import React, {Component} from 'react';
 import {
   SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image , TextInput,AsyncStorage ,TouchableOpacity} from 'react-native';
 import styles from './loginStyle';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import header from './headerStyle';
+import * as Font from 'expo-font';
 export default class OTP extends Component {
 
   constructor(props){

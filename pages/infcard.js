@@ -4,7 +4,7 @@ import {
   import Icon from 'react-native-vector-icons/FontAwesome5';
 import header from './headerStyle';
 import ViewShot from 'react-native-view-shot';
-
+import * as Font from 'expo-font';
 
 const shareOptions ={
     title:'Influencer Card',
