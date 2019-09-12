@@ -91,7 +91,11 @@ export default class Login extends Component {
   }
   componentWillMount(){
     this._getStorageValue();
-    
+    Font.loadAsync({
+      'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+      'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+      'SF': require('../assets/fonts/SF.ttf'),
+    });
   }
 
 
@@ -101,7 +105,8 @@ export default class Login extends Component {
     }
     else if (this.state.current_screen==="Login"){
     return(
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container}  keyboardDismissMode='interactive'
+      keyboardShouldPersistTaps='handled'>
         <View style={{flexDirection:'column',justifyContent:'center'}}>
         <View style={styles.logowrap}>  
             <View style={styles.logo}>

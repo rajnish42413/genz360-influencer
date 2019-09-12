@@ -24,6 +24,13 @@ export default class InfCard extends Component {
     }
   };
 
+  componentDidMount(){
+    Font.loadAsync({
+        'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+        'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+        'SF': require('../assets/fonts/SF.ttf'),
+      });
+  }
 
  
 

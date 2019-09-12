@@ -24,6 +24,8 @@ export default class Transfer extends Component{
         };
     }
 
+
+
     
     nameCheck = () => {
     
@@ -85,7 +87,11 @@ export default class Transfer extends Component{
       }
       componentDidMount(){
         this._getStorageValue();
-        
+        Font.loadAsync({
+          'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+          'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+          'SF': require('../assets/fonts/SF.ttf'),
+        });
       }
       
    
@@ -95,7 +101,8 @@ export default class Transfer extends Component{
 
         return(
 
-            <ScrollView style={{backgroundColor:'#fff'}}>
+            <ScrollView style={{backgroundColor:'#fff'}}  keyboardDismissMode='interactive'
+            keyboardShouldPersistTaps='handled'>
             <View style={header.header_wrapper}>
             <View style={header.wrap}>
             <TouchableOpacity onPress={()=>this.props.navigation.navigate("Wallet")}>

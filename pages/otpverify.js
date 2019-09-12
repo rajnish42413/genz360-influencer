@@ -24,6 +24,11 @@ export default class OTP extends Component {
 
   componentDidMount(){
     this._getStorageValue();
+    Font.loadAsync({
+      'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+      'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+      'SF': require('../assets/fonts/SF.ttf'),
+    });
   }
 
   verifyotp=async ()=>{
@@ -67,7 +72,8 @@ export default class OTP extends Component {
   render(){
     return(
 
-      <View style={header.header_wrapper}>
+      <View style={header.header_wrapper}  keyboardDismissMode='interactive'
+      keyboardShouldPersistTaps='handled'>
       <View style={header.wrap}>
            <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
           <Icon  style={styles.backbtn} name="arrow-left" size={24} color="#fff"/>

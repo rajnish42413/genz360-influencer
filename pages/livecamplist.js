@@ -81,7 +81,11 @@ else{
 }
 componentDidMount(){
   this._getStorageValue();
-  
+  Font.loadAsync({
+    'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+    'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+    'SF': require('../assets/fonts/SF.ttf'),
+  });
 }
 
   _renderPlaceholder = i => <View style={styles.item} key={i} />;
@@ -101,7 +105,7 @@ componentDidMount(){
             <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
                 <Icon  style={header.backbtn} name="arrow-left" size={24} color="#fff" />
                 </TouchableOpacity>
-                <Text style={header.tagline}>Viralizing{'\n'}Your Brand</Text>
+                <Text style={header.tagline}>Cash{'\n'}Your Connect</Text>
             </View>
             </View>
             <ScrollView style={header.createSection_ws}>

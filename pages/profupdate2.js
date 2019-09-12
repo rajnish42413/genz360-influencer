@@ -112,6 +112,11 @@ export default class ProfUpdate2 extends Component{
       componentDidMount(){
         this._getStorageValue();
         this._storeData("current_screen","SMH");
+        Font.loadAsync({
+          'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+          'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+          'SF': require('../assets/fonts/SF.ttf'),
+        });
       }
       
 

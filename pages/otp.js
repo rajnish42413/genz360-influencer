@@ -13,6 +13,17 @@ export default class OTP extends Component {
       otp:'',
     }
   }
+
+
+  componentDidMount(){
+    Font.loadAsync({
+      'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+      'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+      'SF': require('../assets/fonts/SF.ttf'),
+    });
+  }
+
+  
   render(){
     return(
       <ScrollView style={styles.container}>

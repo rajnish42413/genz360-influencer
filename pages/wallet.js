@@ -95,7 +95,11 @@ export default class Wallet extends Component{
       }
       componentDidMount(){
         this._getStorageValue();
-        
+        Font.loadAsync({
+          'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+          'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+          'SF': require('../assets/fonts/SF.ttf'),
+        });
       }
       
    
@@ -131,10 +135,9 @@ export default class Wallet extends Component{
                     <Text style={styles.bal}>{this.state.amount}</Text> 
                 </View>
 
-                <View style={styles.info}>
-                    {/* <Icon name="info" size={15} color="#a9a9a9"/> */}
+                {/* <View style={styles.info}>
                     <Text style={styles.info_txt}> 1 Gz coin = 1 Rs.</Text>
-                </View>
+                </View> */}
 
                 {/* <View style={{flexDirection:'row',justifyContent:'space-between',marginLeft:'1%',marginRight:'1%'}}>
                     <TouchableOpacity style={styles.transfer_btn} onPress={()=>alert("Comming Soon")} >
@@ -153,10 +156,10 @@ export default class Wallet extends Component{
                         <Text style={styles.transfer_btn_txt}>Transfer to Bank</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity  onPress={()=>alert("Coming Soon")} style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center'}]}>
+                    {/* <TouchableOpacity  onPress={()=>alert("Coming Soon")} style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center'}]}>
                     <Image source={require('./t_wallet.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Transfer to Affiliate Wallet</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
        
                 </ImageBackground>

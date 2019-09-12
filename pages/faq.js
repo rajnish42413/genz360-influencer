@@ -23,7 +23,13 @@ export default class FAQ extends Component{
         };
     }
 
-    
+    componentDidMount(){
+        Font.loadAsync({
+            'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+            'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+            'SF': require('../assets/fonts/SF.ttf'),
+          });
+    }
     
 
     render(){
@@ -36,7 +42,7 @@ export default class FAQ extends Component{
             <TouchableOpacity onPress={()=>this.props.navigation.navigate('Profile')}>
                 <Icon  style={header.backbtn} name="arrow-left" size={24} color="#fff" />
                 </TouchableOpacity>
-                <Text style={header.tagline}>Viralizing{'\n'}Your Brand</Text>
+                <Text style={header.tagline}>Cash{'\n'}Your Connect</Text>
             </View>
             </View>
             <ScrollView style={header.createSection_ws}>

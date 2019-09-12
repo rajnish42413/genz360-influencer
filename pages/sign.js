@@ -126,6 +126,11 @@ export default class INFLUENCERDETAILS extends Component {
   componentDidMount() {
     this._getStorageValue();
     this._storeData("current_screen", "INFDETAILS");
+    Font.loadAsync({
+      'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
+      'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+      'SF': require('../assets/fonts/SF.ttf'),
+    });
   }
   setlocation(value){
     this.setState({location:value})
@@ -146,7 +151,8 @@ export default class INFLUENCERDETAILS extends Component {
   render() {
     return (
 
-      <ScrollView style={{backgroundColor:'#fff'}}>
+      <ScrollView style={{backgroundColor:'#fff'}}  keyboardDismissMode='interactive'
+      keyboardShouldPersistTaps='handled'>
       <View style={header.header_wrapper}>
       <View style={header.wrap}>
           <Icon  style={styles.backbtn} name="arrow-left" size={24} color="#fff" />
