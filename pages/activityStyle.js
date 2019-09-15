@@ -55,7 +55,7 @@ export default StyleSheet.create({
     h_list_name:{
         fontSize:17,
         width:'50%',
-        fontFamily:'OpenSans-Bold',
+        fontFamily:'Gilroy-ExtraBold',
         paddingTop:5,
         paddingBottom:5,
         color:'#000',
@@ -64,7 +64,7 @@ export default StyleSheet.create({
     h_list_date:{
         fontSize:17,
         width:'30%',
-        fontFamily:'OpenSans-Bold',
+        fontFamily:'Gilroy-ExtraBold',
         paddingTop:5,
         paddingBottom:5,
 
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     h_list_earn:{
         fontSize:17,
         width:'20%',
-        fontFamily:'OpenSans-Bold',
+        fontFamily:'Gilroy-ExtraBold',
         paddingTop:5,
         paddingBottom:5,
         color:'#000'

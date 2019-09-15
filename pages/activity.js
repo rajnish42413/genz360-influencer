@@ -1,8 +1,9 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import LinearGradient from 'react-native-linear-gradient';
- import * as Font from 'expo-font';
+// import {LinearGradient} from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo';
+import * as Font from 'expo-font';
 import styles from './activityStyle';
 import header from './headerStyle';
 
@@ -80,9 +81,9 @@ _onRefresh = () => {
       alert(error);
     }
   }
-  async componentDidMount() {
+  componentDidMount() {
   
-    await Font.loadAsync({
+    Font.loadAsync({
       'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
       'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
       'SF': require('../assets/fonts/SF.ttf'),

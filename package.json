@@ -6,8 +6,6 @@
     "start": "react-native start",
     "test": "jest"
   },
-
-  
   "dependencies": {
     "expo": "^34.0.1",
     "react": "16.8.3",
@@ -40,12 +38,10 @@
   "jest": {
     "preset": "react-native"
   },
-  "private": true , 
+  "private": true,
   "rnpm": {
     "assets": [
       "./assets/fonts/Gilroy-ExtraBold.ttf"
     ]
   }
-
-
 }

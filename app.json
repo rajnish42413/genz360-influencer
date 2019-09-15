@@ -16,10 +16,13 @@
       "package": "com.genz360.influencer"
     },
     "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "description": ""
+       "android"
+      ],
+    "description": "",
+    "notification": {
+      
+      "icon": "./images/gi.png",
+      "androidMode": "default"
+    }
   }
 }

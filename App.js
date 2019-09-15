@@ -9,7 +9,7 @@ import Profile from './pages/newprofile';
 import ProfUpdate2 from './pages/profupdate2';
 import TNC from './pages/tnc';
 import Wallet from "./pages/wallet"
-import Notifications from './pages/notifications';
+import Notificationspage from './pages/notifications';
 import Landingpage from "./pages/landingpage"
 import Campaign from './pages/camp'
 import Browse from './pages/browsecamp'
@@ -26,6 +26,8 @@ import AddPlatform from './pages/addplatform';
 import Transfer from './pages/transfer';
 import About from './pages/about';
 import * as Font from 'expo-font';
+
+
 
 const MainDashBoard = createStackNavigator(
   {
@@ -86,7 +88,7 @@ const MainTabs = createBottomTabNavigator(
     Dashboard: MainDashBoard,
     Browse:Browse,
     Wallet:Wallet,
-    Notifications:Notifications,
+    Notifications:Notificationspage,
     Profile:MainProfile
   },
   {

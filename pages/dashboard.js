@@ -6,6 +6,12 @@ import * as Font from 'expo-font';
  
 import styles from './dashstyle';
 import header from './headerStyle';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+
+
+const PUSH_ENDPOINT = 'http://www.genz360.com:81/register/push-token';
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -84,6 +90,7 @@ _onRefresh = () => {
 async _getStorageValue(){
   let value = await AsyncStorage.getItem("tokken");
   this.setState({tokken:value.toString()});
+  this.registerForPushNotificationsAsync()
   this.get_daily_task();
   this.get_live_campaigns();
   this.get_applied_campaigns();
@@ -186,6 +193,69 @@ componentDidMount(){
   });
   
 }
+
+
+ registerForPushNotificationsAsync=async()=> {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  // Get the token that uniquely identifies this device
+  let token = await Notifications.getExpoPushTokenAsync();
+
+  // POST the token to your backend server from where you can retrieve it to send push notifications.
+  // return fetch(PUSH_ENDPOINT, {
+  //   method: 'POST',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     tokken:this.state.tokken,
+  //     push_tokken:token,
+  //   }),
+  // });
+
+  try {
+
+    let response = await fetch(PUSH_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tokken: this.state.tokken,
+        push_tokken:token,
+      }),
+    });
+
+    let responseJson = await response.json();
+
+    if (responseJson.valid) {
+      return
+    }
+  } catch (error) {
+    alert(error);
+  }
+}
+
+
 
 
 

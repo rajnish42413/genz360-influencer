@@ -20,7 +20,7 @@ const MyCampaign = (props) =>(
   ); 
 
 
-export default class Notifications extends Component{
+export default class Notificationspage extends Component{
     static navigationOptions = {
         tabBarIcon: ({focused, tintColor}) => (
           <Image source={require('../images/bell.png')} style={header.tabIcon} />
