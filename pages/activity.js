@@ -1,9 +1,14 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
+<<<<<<< HEAD
 // import {LinearGradient} from 'react-native-linear-gradient';
 import { LinearGradient } from 'expo';
 import * as Font from 'expo-font';
+=======
+import {LinearGradient} from 'expo-linear-gradient';
+ import * as Font from 'expo-font';
+>>>>>>> b1e0855f34bf7bfa0a20a01a226bd8e2f77591b9
 import styles from './activityStyle';
 import header from './headerStyle';
 
@@ -14,13 +19,12 @@ const SummaryList = (props) => (
       <Text style={styles.sum_list_date}></Text>
       <Text style={styles.sum_list_earn}>{props.item.earning}</Text>
     </TouchableOpacity>
-
   );
 
 
-
-
 export default class Activity extends Component {
+
+  _isMounted = false;
 
   constructor (props) {
     super(props);
@@ -29,7 +33,6 @@ export default class Activity extends Component {
         total_earning:0,
         count:0,
         fontLoaded:false
-       
     };
 }
 
@@ -41,15 +44,18 @@ _onRefresh = () => {
 
 
   async _getStorageValue() {
+    if(this._isMounted){
     let value = await AsyncStorage.getItem("tokken");
     this.setState({ tokken: value.toString() })
     this.get_campaigns();
+    }
   }
+
   _storeData = async (key, val) => {
     try {
       await AsyncStorage.setItem(key, val);
     } catch (error) {
-      // Error saving data
+      alert(error);
     }
   };
 
@@ -77,20 +83,35 @@ _onRefresh = () => {
         alert(responseJson.err);
       }
     } catch (error) {
-      //alert("Some thing went wrong!!!");
       alert(error);
     }
   }
+<<<<<<< HEAD
   componentDidMount() {
   
     Font.loadAsync({
+=======
+
+  async componentDidMount() {
+    this._isMounted = true;
+    await Font.loadAsync({
+>>>>>>> b1e0855f34bf7bfa0a20a01a226bd8e2f77591b9
       'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
       'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
       'SF': require('../assets/fonts/SF.ttf'),
+      'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf')
     });
-     this.setState({ fontLoadedd:true });
-       this._getStorageValue();
+    if(this._isMounted){
+     this.setState({ fontLoaded:true });
+     this._getStorageValue();
+    }
   }
+
+
+componentWillUnmount() {
+    this._isMounted = false;
+  }
+
 
 
 
@@ -98,8 +119,7 @@ _onRefresh = () => {
   
       return (
 
-          this.state.fontLoadedd ? (
-
+          this.state.fontLoaded ? (
         <ScrollView style={[styles.container,{backgroundColor:'#fff'}]}
         refreshControl={
           <RefreshControl
@@ -164,7 +184,7 @@ _onRefresh = () => {
         </ScrollView>
         
       ): null
-      )
+      );
     }
   }
 

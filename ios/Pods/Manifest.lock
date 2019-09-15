@@ -1,5 +1,7 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - BVLinearGradient (2.5.6):
+    - React
   - DoubleConversion (1.1.6)
   - EXAppLoaderProvider (6.0.0)
   - EXConstants (6.0.0):
@@ -34,6 +36,10 @@ PODS:
   - glog (0.3.5)
   - React (0.59.10):
     - React/Core (= 0.59.10)
+  - react-native-image-picker (0.28.0):
+    - React
+  - react-native-webview (6.3.1):
+    - React
   - React/Core (0.59.10):
     - yoga (= 0.59.10.React)
   - React/CxxBridge (0.59.10):
@@ -93,6 +99,10 @@ PODS:
     - React
   - RNScreens (1.0.0-alpha.22):
     - React
+  - RNVectorIcons (6.6.0):
+    - React
+  - RNViewShot (2.6.0):
+    - React
   - UMBarCodeScannerInterface (3.0.0)
   - UMCameraInterface (3.0.0)
   - UMConstantsInterface (3.0.0)
@@ -111,6 +121,7 @@ PODS:
   - yoga (0.59.10.React)
 
 DEPENDENCIES:
+  - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -124,6 +135,8 @@ DEPENDENCIES:
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -141,6 +154,8 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler/RNGestureHandler.podspec`)
   - RNReanimated (from `../node_modules/react-native-reanimated/RNReanimated.podspec`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - RNViewShot (from `../node_modules/react-native-view-shot`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -160,6 +175,8 @@ SPEC REPOS:
     - boost-for-react-native
 
 EXTERNAL SOURCES:
+  BVLinearGradient:
+    :path: "../node_modules/react-native-linear-gradient"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXAppLoaderProvider:
@@ -198,12 +215,20 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   RNGestureHandler:
     :podspec: "../node_modules/react-native-gesture-handler/RNGestureHandler.podspec"
   RNReanimated:
     :podspec: "../node_modules/react-native-reanimated/RNReanimated.podspec"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
+  RNViewShot:
+    :path: "../node_modules/react-native-view-shot"
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -245,6 +270,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   EXAppLoaderProvider: 7a8185228d8ba9e689a0e2d6d957fe9bdd49c8a0
   EXConstants: 5d81e84ca71b9a552529889cc798b4a04e9e22b3
@@ -259,9 +285,13 @@ SPEC CHECKSUMS:
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
+  react-native-image-picker: e6e06d4315e3c85bad17e4b2002cd29f11d202c8
+  react-native-webview: 830d41c90141f3e997ddb271fa93c19f3a619ccc
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNReanimated: 7a52c90473b5e81c13408d40d797b98387eaddde
   RNScreens: 720a9e6968beb73e8196239801e887d8401f86ed
+  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  RNViewShot: 05672e0b3c36cd70633466614b4451869a70c6c7
   UMBarCodeScannerInterface: 84ea2d6b58ff0dc27ef9b68bab71286be18ee020
   UMCameraInterface: 26b26005d1756a0d5f4f04f1e168e39ea9154535
   UMConstantsInterface: 038bacb19de12b6fd328c589122c8dc977cccf61
@@ -276,6 +306,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 8664abd37a00715727e60df9ecd65e42ba47b548
   yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
-PODFILE CHECKSUM: b426398346bddb575941bb1bbe67b06ea4b2ca19
+PODFILE CHECKSUM: 6a401229e05d769c2efca8e4323ea76cdc8c405b
 
 COCOAPODS: 1.7.5
