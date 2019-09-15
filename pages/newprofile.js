@@ -1,14 +1,15 @@
 import React , {Component} from "react";
-import {ScrollView,Alert, View, Text, TextInput ,StyleSheet ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground,AsyncStorage,ActivityIndicator} from "react-native";
+import {ScrollView,Alert, View, Text,TouchableOpacity ,Image ,AsyncStorage,ActivityIndicator} from "react-native";
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import LinearGradient from 'react-native-linear-gradient';
- import * as Font from 'expo-font';
 import styles from './profStyle2';
 import header from './headerStyle';
 
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
-import ImagePicker from 'react-native-image-picker';
+
+
 const options = {
     title: 'Select Logo',
     takePhotoButtonTitle:'Take Photo',
@@ -63,6 +64,14 @@ export default class  Proflie extends Component {
     };
 }
 
+getPermissionAsync = async () => {
+  if (Constants.platform.ios) {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!');
+    }
+  }
+}
 
 confirm = () =>{
   Alert.alert(
@@ -91,7 +100,7 @@ _storeData = async (key,val) => {
   try {
     await AsyncStorage.setItem(key, val);
   } catch (error) {
-    // Error saving data
+    alert(error);
   }
 };
 
@@ -151,26 +160,26 @@ getprofile=async ()=>{
 }
 componentDidMount(){
   this._getStorageValue();
-  
+  this.getPermissionAsync();  
 }
 
-showpicker(){
-  ImagePicker.showImagePicker(options, (response) => {
-    if (response.didCancel) {
-      alert("You Canceled The Upload")
-    } else if (response.error) {
-      alert("Some thing went wrong.")
-    }else {
-      const source={uri:response.uri}
-      this.setState({imageSource:source,imageData:response.data})
+async showpicker(){
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+    console.log(result);
+    if (!result.cancelled) {
+      const source={uri:result.uri}
+      this.setState({imageSource:source,imageData:result})
       this.uploadinfprofile();
     }
-  });
+ 
 }
 
 uploadinfprofile=async()=>{
   try {
-    
     let response = await fetch('http://www.genz360.com:81/infprofileimageupdate',{
       method: 'POST',
       headers: {

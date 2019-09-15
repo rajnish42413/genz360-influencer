@@ -1,7 +1,7 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import LinearGradient from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
  import * as Font from 'expo-font';
 import styles from './activityStyle';
 import header from './headerStyle';
@@ -14,8 +14,6 @@ const SummaryList = (props) => (
       <Text style={styles.sum_list_earn}>{props.item.earning}</Text>
     </TouchableOpacity>
   );
-
-
 
 
 export default class Activity extends Component {
