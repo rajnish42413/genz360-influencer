@@ -1,7 +1,7 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'expo-linear-gradient';
  import * as Font from 'expo-font';
 import styles from './activityStyle';
 import header from './headerStyle';
@@ -13,7 +13,6 @@ const SummaryList = (props) => (
       <Text style={styles.sum_list_date}></Text>
       <Text style={styles.sum_list_earn}>{props.item.earning}</Text>
     </TouchableOpacity>
-
   );
 
 
@@ -93,12 +92,13 @@ _onRefresh = () => {
       'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf')
     });
     if(this._isMounted){
-     this.setState({ fontLoadedd:true });
+     this.setState({ fontLoaded:true });
      this._getStorageValue();
     }
   }
 
-  componentWillUnmount() {
+
+componentWillUnmount() {
     this._isMounted = false;
   }
 
@@ -109,8 +109,7 @@ _onRefresh = () => {
   
       return (
 
-          this.state.fontLoadedd ? (
-
+          this.state.fontLoaded ? (
         <ScrollView style={[styles.container,{backgroundColor:'#fff'}]}
         refreshControl={
           <RefreshControl
@@ -175,7 +174,7 @@ _onRefresh = () => {
         </ScrollView>
         
       ): null
-      )
+      );
     }
   }
 

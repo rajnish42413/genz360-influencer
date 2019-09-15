@@ -99,7 +99,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.genztest"
+        applicationId "com.influencer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -139,6 +139,11 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-webview')
+    implementation project(':react-native-view-shot')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-image-picker')
     implementation project(':react-native-screens')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-gesture-handler')

@@ -15,11 +15,9 @@
     "android": {
       "package": "com.genz360.influencer"
     },
-
     "androidStatusBar": {
       "backgroundColor": "#0C3084"
     },
-
     "platforms": [
       "ios",
       "android",

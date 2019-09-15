@@ -2,8 +2,8 @@ platform :ios, '10.0'
 
 require_relative '../node_modules/react-native-unimodules/cocoapods'
 
-target 'Genztest' do
-  # Pods for Genztest
+target 'Influencer' do
+  # Pods for Influencer
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'CxxBridge',
@@ -31,5 +31,15 @@ target 'Genztest' do
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
   use_unimodules!
+
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'RNViewShot', :path => '../node_modules/react-native-view-shot'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
 end
