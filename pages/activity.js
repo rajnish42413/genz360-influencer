@@ -21,6 +21,8 @@ const SummaryList = (props) => (
 
 export default class Activity extends Component {
 
+  _isMounted = false;
+
   constructor (props) {
     super(props);
     this.state = {
@@ -28,7 +30,6 @@ export default class Activity extends Component {
         total_earning:0,
         count:0,
         fontLoaded:false
-       
     };
 }
 
@@ -40,15 +41,18 @@ _onRefresh = () => {
 
 
   async _getStorageValue() {
+    if(this._isMounted){
     let value = await AsyncStorage.getItem("tokken");
     this.setState({ tokken: value.toString() })
     this.get_campaigns();
+    }
   }
+
   _storeData = async (key, val) => {
     try {
       await AsyncStorage.setItem(key, val);
     } catch (error) {
-      // Error saving data
+      alert(error);
     }
   };
 
@@ -76,20 +80,28 @@ _onRefresh = () => {
         alert(responseJson.err);
       }
     } catch (error) {
-      //alert("Some thing went wrong!!!");
       alert(error);
     }
   }
+
   async componentDidMount() {
-  
+    this._isMounted = true;
     await Font.loadAsync({
       'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
       'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
       'SF': require('../assets/fonts/SF.ttf'),
+      'OpenSans-Bold': require('../assets/fonts/OpenSans-Bold.ttf')
     });
+    if(this._isMounted){
      this.setState({ fontLoadedd:true });
-       this._getStorageValue();
+     this._getStorageValue();
+    }
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
 
 
 
