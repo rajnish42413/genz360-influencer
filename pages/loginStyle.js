@@ -34,14 +34,25 @@ export default StyleSheet.create({
         marginLeft:'5%',
         marginTop:20,
     },
+
     inputSection_icon:{
+        flexDirection:'row',
+        borderWidth:1,
+        borderRadius:8,
+        borderColor:'#dadada',  
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:10,  
+      }, 
+
+    inputSection_icon_ws:{
         flexDirection:'row',
           borderWidth:1,
           borderRadius:8,
           borderColor:'#dadada',  
           justifyContent:'center',
           alignItems:'center',
-          marginTop:10,
+          marginTop:0,
          
       }  , 
       
@@ -56,12 +67,14 @@ export default StyleSheet.create({
           marginTop:10,
          
       }  , 
+
+    
       
       inputSection_icon_date: {
         flexDirection:'row',
         alignItems:'center',
         borderColor:'#dadada', 
-        marginTop:12,
+        marginTop:-2,
     },
 
 

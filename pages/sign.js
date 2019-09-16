@@ -29,12 +29,17 @@ export default class INFLUENCERDETAILS extends Component {
       cnfpass: '',
       color: '',
       tnc: false,
+      gender:'',
       date: '',
       location: '',
       age: 0,
-      msg:'',
       loactiondict: [],
-      loading:false
+      loading:false,
+      namemsg:'',
+      emailmsg:'',
+      dobmsg:'',
+      locmsg:'',
+      gendermsg:'',
     }
   }
 
@@ -145,18 +150,65 @@ export default class INFLUENCERDETAILS extends Component {
     this.setState({location:value})
   }
 
+  // nameCheck = () => {
+  //   let name=/[a-zA-Z]/;
+  //   let email= /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  //   if (name.test(this.state.fname) && name.test(this.state.lname) && email.test(this.state.email)){
+  //     this.setState({loading:true});
+  //     this.submitinfdetails();
+  //   }
+  //   else{
+  //     this.setState({msg:'Enter Details'});
+  //   }
+  // }
+
   nameCheck = () => {
     let name=/[a-zA-Z]/;
     let email= /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  
+    if (email.test(this.state.email) &&  name.test(this.state.fname) && name.test(this.state.lname)
+       ){
+       this.submitinfdetails();
+    }
 
-    if (name.test(this.state.fname) && name.test(this.state.lname) && email.test(this.state.email)){
-      this.setState({loading:true});
-      this.submitinfdetails();
+
+
+    if(this.state.fname==='' || this.state.lname==='' || !name.test(this.state.fname) || !name.test(this.state.lname)) {
+      this.setState({namemsg:'Enter Valid Name'});
+    }else {
+      this.setState({namemsg:''})
     }
-    else{
-      this.setState({msg:'Enter Details'});
+
+    
+  
+
+    if(!email.test(this.state.email) || this.state.email===''){
+      this.setState({emailmsg:'Enter Valid email'})
+    }else{
+      this.setState({emailmsg:''})
     }
+
+    if(this.state.age==0){
+      this.setState({dobmsg:'Enter Valid Date of Birth'});
+    }else if(this.state.age>35){
+      this.setState({dobmsg:'Age cannot be greater than 35'});
+    }else if(this.state.age<15){
+      this.setState({dobmsg:'Age cannot be less than 15'});
+    }else{
+      this.setState({dobmsg:''});
+    }
+
+    if(this.state.gender==''){
+      this.setState({gendermsg:'Enter Gender'});
+    }else{
+      this.setState({gendermsg:''});
+    }
+
+
+  
   }
+
 
   render() {
     if (!this.state.loading)
@@ -177,9 +229,9 @@ export default class INFLUENCERDETAILS extends Component {
           <View >
 
             <Text style={header.heading_normal}>PROFILE DETAILS</Text>
-             <Text style={{textAlign:'left',marginTop:8,fontSize:15,fontFamily:'SF',color:'#eb7070'}}>{this.state.msg}</Text>
-            {/* <View style={{ paddingTop: 15 }}></View> */}
-            {/* <Text style={{textAlign:'left',marginTop:8,fontSize:15,fontFamily:'SF',color:'#eb7070'}}>{this.state.msg}</Text> */}
+             
+
+            <Text style={{textAlign:'left',fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.namemsg}</Text> 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
               <View style={[styles.inputSection_sign, { flex: 1, marginRight: 5 }]}>
@@ -213,7 +265,8 @@ export default class INFLUENCERDETAILS extends Component {
 
             </View>
 
-            <View style={styles.inputSection_icon}>
+            <Text style={{textAlign:'left',fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.emailmsg}</Text> 
+            <View style={styles.inputSection_icon_ws}>
               <Icon style={styles.icon} name="at" size={24} color="#dadada" />
               <TextInput
                 style={styles.input_icon_sign}
@@ -228,14 +281,11 @@ export default class INFLUENCERDETAILS extends Component {
               />
             </View>
 
-            <View style={{ marginTop: 2 }}></View>
+            
 
+
+            <Text style={{textAlign:'left',fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.dobmsg}</Text> 
             <View style={styles.inputSection_icon_date}>
-
-
-
-
-
               <DatePicker
                 style={[styles.input_date,]}
                 date={this.state.date}
@@ -273,7 +323,7 @@ export default class INFLUENCERDETAILS extends Component {
                 }}
                 onDateChange={(date) => { this.setState({ date: date }); this.getAge(this.state.date) }}
                 ref={(b) => this.date = b}
-                onSubmitEditing={() => this.state.foucs()}
+                onSubmitEditing={() => this.b.foucs()}
               />
 
 
@@ -290,7 +340,7 @@ export default class INFLUENCERDETAILS extends Component {
 
 
             </View>
-            <View style={{ marginTop: 15 }}></View>
+            <View style={{ marginTop: 0 }}></View>
 
             {/* <View style={[header.dropdown, { flexDirection: 'column', paddingLeft: 10, paddingTop: 5 }]}>
              
@@ -306,16 +356,16 @@ export default class INFLUENCERDETAILS extends Component {
               </Picker>
             </View>  */}
 
-
+<Text style={{textAlign:'left',fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.locmsg}</Text>
             <Location setlocation={this.setlocation.bind(this)} />
 
 
-
-            <View style={[header.dropdown, { flexDirection: 'column', paddingLeft: 10, paddingTop: 5 }]}>
+            <Text style={{textAlign:'left',fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.gendermsg}</Text>
+            <View style={[header.dropdown, {marginTop:0, flexDirection: 'column', paddingLeft: 10, paddingTop: 5 }]}>
               <Picker
                 selectedValue={this.state.gender}
 
-                style={{ width: '100%', color: '#a9a9a9', fontSize: 18 }}
+                style={{ width: '100%', color: '#000', fontSize: 18 }}
 
 
                 onValueChange={(itemValue, itemIndex) =>
@@ -333,7 +383,7 @@ export default class INFLUENCERDETAILS extends Component {
 
 
 
-            <TouchableOpacity style={styles.nextbtn} onPress={ this.nameCheck()}>
+            <TouchableOpacity style={styles.nextbtn} onPress={()=>this.nameCheck()}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={styles.nextbtn_txt}>NEXT</Text>
                 <Icon name="arrow-right" size={16} color="#fff" style={{ paddingLeft: 10 }} />

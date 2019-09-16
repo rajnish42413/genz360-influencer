@@ -8,9 +8,6 @@ import * as Font from 'expo-font';
 import header from './headerStyle';
 
 
-
-
-
 export default class AddPlatform extends Component{
     
     constructor(props){
@@ -162,13 +159,14 @@ export default class AddPlatform extends Component{
             <ScrollView style={{backgroundColor:'#fff'}}>
           <View style={header.header_wrapper}>
           <View style={header.wrap}>
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate('Profile')}>
+           <TouchableOpacity onPress={()=>this.props.navigation.navigate('Profile')}>
             <Icon  style={styles.backbtn} name="arrow-left" size={24} color="#fff" />
             </TouchableOpacity>
               <Text style={header.tagline}>Cash{'\n'}Your Connect</Text>
           </View>
 
           <ScrollView style={[styles.createSection,{backgroundColor:'#fff'}]}>
+
               <Text style={header.heading_normal} >Add Platform (Please Authenticate)</Text>
 
 
@@ -320,16 +318,20 @@ export default class AddPlatform extends Component{
         {
             this.state.yt ? 
                 <View>
-                    <View style={styles.subwrap}>
+                    <View style={[styles.subwrap,{flexDirection:'row',justifyContent:'space-between'}]}>
 
                   
                      <TextInput
-                        style={styles.input}
+                        style={[styles.input,{flex:0.7,paddingLeft:5}]}
                         placeholder="USER ID"
                         onChangeText={(ytid) => {this.setState({ytid:ytid})}}
                         value={this.state.ytid}
                         underlineColorAndroid="transparent"
                     />
+
+                  <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                      <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
+                  </TouchableOpacity>
 
                     </View> 
                     </View>:null
@@ -359,15 +361,20 @@ export default class AddPlatform extends Component{
         {
             this.state.twitter ? 
                 <View>
-                    <View style={styles.subwrap}>
+                    <View style={[styles.subwrap,{flexDirection:'row',justifyContent:'space-between'}]}>
                   
                    <TextInput
-                        style={styles.input}
+                        style={[styles.input,{flex:0.7,paddingLeft:5}]}
                         placeholder="USER ID"
                         onChangeText={(twitterid) => {this.setState({twitterid:twitterid})}}
                         value={this.state.twitterid}
                         underlineColorAndroid="transparent"
                         />
+
+                  <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                      <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
+                  </TouchableOpacity>
+                  
                     </View> 
                     </View>:null
 
@@ -385,19 +392,15 @@ export default class AddPlatform extends Component{
 
 
 
-           <View style={styles.btn_wrap}>
+           {/* <View style={styles.btn_wrap}>
               <TouchableOpacity style={styles.nextbtn} onPress={()=>this.submitinfplatform()}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                    <Text style={styles.nextbtn_txt}>Next </Text>
                    <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
                   </View>
              </TouchableOpacity>
-{/* 
-          <TouchableOpacity style={styles.cancelbtn}>
-             <Text style={styles.cancelbtn_txt}>Cancel</Text>
-          </TouchableOpacity> */}
 
-          </View>
+          </View> */}
 
           </View>
 

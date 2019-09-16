@@ -106,6 +106,7 @@ export default class OTP extends Component {
                           placeholder="4 digit OTP"
                           onChangeText={(otp) => {this.setState({otp:otp})}}
                           value={this.state.otp}
+                          maxLength={4}
                           underlineColorAndroid="transparent"
                           ref={(b)=>this.otp=b}
                           />                 

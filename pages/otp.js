@@ -47,6 +47,7 @@ export default class OTP extends Component {
                  keyboardType={'numeric'}
                  onChangeText={(contact) => {this.setState({contact:contact})}}
                  value={this.state.contact}
+                 maxLength={4}
                  underlineColorAndroid="transparent"
                 />
          </View>
