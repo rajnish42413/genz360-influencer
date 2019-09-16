@@ -119,15 +119,15 @@ onCapture= (uri)=> {
             </View> */}
 
                 <View style={{flexDirection:'column',marginTop:20}}>
-                    <TouchableOpacity onPress={()=>this.onCapture2()} 
+                    {/* <TouchableOpacity onPress={()=>this.onCapture2()} 
                         style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center',
                         borderBottomWidth:1,borderTopWidth:1,borderTopColor:'#dadada',borderBottomColor:'#dadada'}]}>
                         
                         <Image source={require('./share.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Share</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    <TouchableOpacity onPress={()=>this.onCapture}
+                    <TouchableOpacity onPress={()=>this.onCapture()}
                             style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center',borderBottomWidth:1,borderColor:'#dadada'}]}>
                     <Image source={require('./download.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Download</Text>

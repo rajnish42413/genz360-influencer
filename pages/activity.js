@@ -1,14 +1,8 @@
 import React , {Component} from "react";
 import {ScrollView, View, Text, TextInput ,StyleSheet,AsyncStorage,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Switch,ImageBackground} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-<<<<<<< HEAD
-// import {LinearGradient} from 'react-native-linear-gradient';
-import { LinearGradient } from 'expo';
-import * as Font from 'expo-font';
-=======
 import {LinearGradient} from 'expo-linear-gradient';
- import * as Font from 'expo-font';
->>>>>>> b1e0855f34bf7bfa0a20a01a226bd8e2f77591b9
+import * as Font from 'expo-font';
 import styles from './activityStyle';
 import header from './headerStyle';
 
@@ -86,16 +80,10 @@ _onRefresh = () => {
       alert(error);
     }
   }
-<<<<<<< HEAD
-  componentDidMount() {
-  
-    Font.loadAsync({
-=======
 
   async componentDidMount() {
     this._isMounted = true;
     await Font.loadAsync({
->>>>>>> b1e0855f34bf7bfa0a20a01a226bd8e2f77591b9
       'Gilroy-ExtraBold': require('../assets/fonts/Gilroy-ExtraBold.ttf'),
       'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
       'SF': require('../assets/fonts/SF.ttf'),

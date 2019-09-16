@@ -230,6 +230,7 @@ componentDidMount(){
   //     push_tokken:token,
   //   }),
   // });
+  
 
   try {
 
@@ -252,6 +253,12 @@ componentDidMount(){
     }
   } catch (error) {
     alert(error);
+  }
+  if (Platform.OS === 'android') {
+    Notifications.createChannelAndroidAsync('GenZ360', {
+      name: 'GenZ360',
+      sound: true,
+    });
   }
 }
 

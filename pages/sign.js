@@ -9,7 +9,12 @@ import styles from './loginStyle';
 import header from './headerStyle';
 // import Location from './newlocation';
 import * as Font from 'expo-font';
-import Location from './location'
+import Location from './location';
+const Loader=()=>(
+  <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+)
 export default class INFLUENCERDETAILS extends Component {
 
   constructor(props) {
@@ -28,7 +33,8 @@ export default class INFLUENCERDETAILS extends Component {
       location: '',
       age: 0,
       msg:'',
-      loactiondict: []
+      loactiondict: [],
+      loading:false
     }
   }
 
@@ -113,13 +119,16 @@ export default class INFLUENCERDETAILS extends Component {
       let responseJson = await response.json();
 
       if (responseJson.valid) {
+        this.setState({loading:false});
         this.props.navigation.navigate("SMH");
       }
       else {
         alert(responseJson.err);
+        this.setState({loading:false});
       }
     } catch (error) {
       alert(error);
+      this.setState({loading:false});
     }
   }
   
@@ -141,6 +150,7 @@ export default class INFLUENCERDETAILS extends Component {
     let email= /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     if (name.test(this.state.fname) && name.test(this.state.lname) && email.test(this.state.email)){
+      this.setState({loading:true});
       this.submitinfdetails();
     }
     else{
@@ -149,6 +159,8 @@ export default class INFLUENCERDETAILS extends Component {
   }
 
   render() {
+    if (!this.state.loading)
+    {
     return (
 
       <ScrollView style={{backgroundColor:'#fff'}}  keyboardDismissMode='interactive'
@@ -321,7 +333,7 @@ export default class INFLUENCERDETAILS extends Component {
 
 
 
-            <TouchableOpacity style={styles.nextbtn} onPress={ this.nameCheck}>
+            <TouchableOpacity style={styles.nextbtn} onPress={ this.nameCheck()}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={styles.nextbtn_txt}>NEXT</Text>
                 <Icon name="arrow-right" size={16} color="#fff" style={{ paddingLeft: 10 }} />
@@ -346,7 +358,10 @@ export default class INFLUENCERDETAILS extends Component {
      </View>
      </ScrollView>
 
-    );
+    );}
+    else{
+      return <Loader />
+    }
   }
 }
 

@@ -7,9 +7,11 @@ import header from './headerStyle';
 
 
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
-
-import ImagePicker from 'react-native-image-picker';
+// import ImagePicker from 'react-native-image-picker';
 const options = {
     title: 'Select Logo',
     takePhotoButtonTitle:'Take Photo',
@@ -63,6 +65,14 @@ async _getStorageValue(){
   this.setState({tokken:value.toString()});
   this._campaigns();
   this._applied_status();
+}
+getPermissionAsync = async () => {
+  if (Constants.platform.ios) {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!');
+    }
+  }
 }
 
 _campaigns=async ()=>{
@@ -157,17 +167,20 @@ _submit_creative = async()=>{
     alert(error)
   }
 }
-showpicker(){
-  ImagePicker.showImagePicker(options, (response) => {
-    if (response.didCancel) {
-      alert("You Canceled The Upload")
-    } else if (response.error) {
-      alert("Some thing went wrong.")
-    }else {
-      const source={uri:response.uri}
-      this.setState({imageSource:source,imageData:response.data})
-    }
+
+async showpicker(){
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    base64 :true
   });
+  // alert(JSON.stringify(result.base64))
+  if (!result.cancelled) {
+    const source={uri:result.uri}
+    this.setState({imageSource:source,imageData:result.base64})
+  }
+
 }
 
 _applied_status = async()=>{
@@ -307,6 +320,12 @@ componentDidMount(){
                             onValueChange={(img)=>this.setState({img:!this.state.img})}/>     
                             <Text style={header.name}>Image</Text>      
                     </View>:null}
+                    {
+                      this.state.imageData!==null
+                      ?
+                      <Image source={{uri:this.state.imageSource}} style={{height:200,width:200}} />:
+                      null
+                      }
                     {
                       this.state.img && this.state.campaign.subtype==='4'?
                       <View style={[styles.inputSection_icon,{marginLeft:'5%',marginRight:'5%'}]}>

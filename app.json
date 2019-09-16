@@ -1,9 +1,9 @@
 {
-  "name": "Influencer",
-  "displayName": "Genz360 Influencer",
+  "name": "GenZ360",
+  "displayName": "Genz360",
   "expo": {
-    "name": "Genz360 Infuencer",
-    "slug": "genz360-influencer",
+    "name": "Genz360",
+    "slug": "GenZ360",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
     "version": "1.2.1",
@@ -23,8 +23,7 @@
       ],
     "description": "",
     "notification": {
-      
-      "icon": "./images/gi.png",
+      "icon": "./images/notificationicon.png",
       "androidMode": "default"
     }
   }

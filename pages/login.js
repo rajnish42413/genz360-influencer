@@ -20,6 +20,7 @@ export default class Login extends Component {
       token:null,
       current_screen:"",
       numValid:true,
+      loading:false
     }
   }
 
@@ -79,14 +80,17 @@ export default class Login extends Component {
   
       if (responseJson.valid){
         this._storeData('tokken',responseJson.tokken)
+        this.setState({loading:false})
         this.props.navigation.navigate("OTPVERIFY");
       }
       else{
         alert(responseJson.err);
+        this.setState({loading:false})
       }
     } catch (error) {
       //console.error(error);
       alert(error)
+      this.setState({loading:false})
     }
   }
   componentWillMount(){
@@ -104,6 +108,7 @@ export default class Login extends Component {
       return <Loader />
     }
     else if (this.state.current_screen==="Login"){
+      if (!this.state.loading){
     return(
       <ScrollView style={styles.container}  keyboardDismissMode='interactive'
       keyboardShouldPersistTaps='handled'>
@@ -137,7 +142,7 @@ export default class Login extends Component {
         
               
 
-                  <TouchableOpacity style={styles.nextbtn} onPress={()=>this.login()}>
+                  <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.login();this.setState({loading:true})}}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
                          <Text style={styles.nextbtn_txt}>NEXT</Text>
                          <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
@@ -151,7 +156,10 @@ export default class Login extends Component {
         <View style={{paddingBottom:40}}></View>
 
       </ScrollView>
-    );
+    );}
+    else{
+      return <Loader />
+    }
     }
     else{
       return <Loader />

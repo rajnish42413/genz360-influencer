@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import {
-  SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image , TextInput,AsyncStorage ,TouchableOpacity} from 'react-native';
+  SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image , TextInput,AsyncStorage ,TouchableOpacity,ActivityIndicator} from 'react-native';
 import styles from './loginStyle';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import header from './headerStyle';
 import * as Font from 'expo-font';
+
+
+const Loader=()=>(
+  <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+)
 export default class OTP extends Component {
 
   constructor(props){
@@ -52,23 +59,28 @@ export default class OTP extends Component {
       let responseJson = await response.json();
   
       if (responseJson.valid && responseJson.updated){
-       
+        this.setState({loading:false})
           this.props.navigation.navigate("Home");  
       }
         else if(responseJson.valid && !responseJson.updated){
+          this.setState({loading:false})
           this.props.navigation.navigate("INFDETAILS");
         }
       
       else{
         alert(responseJson.err);
+        this.setState({loading:false})
       }
     } catch (error) {
       alert("Some thing went wrong!!!");
+      this.setState({loading:false})
 
     }
   }
 
   render(){
+    if (!this.state.loading)
+    {
     return(
 
       <View style={header.header_wrapper}  keyboardDismissMode='interactive'
@@ -102,7 +114,7 @@ export default class OTP extends Component {
                     <Text style={{fontSize:16,color:'blue'}}>Resend OTP</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={styles.nextbtn} onPress={()=>this.verifyotp()}>
+                  <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.verifyotp();this.setState({loading:true})}}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
                          <Text style={styles.nextbtn_txt}>NEXT</Text>
                          <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
@@ -115,7 +127,10 @@ export default class OTP extends Component {
     
      
 
-    );
+    ); }
+    else{
+      return <Loader />
+    }
   }
 }
 

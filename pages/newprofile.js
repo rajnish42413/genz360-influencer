@@ -120,7 +120,7 @@ let response = await fetch('http://www.genz360.com:81/inflogout',{
 let responseJson = await response.json();
 
 if (responseJson.valid){
-  this._storeData("tokken",null);
+  this._storeData("tokken","");
   this._storeData("current_screen","Login");
   this.props.navigation.navigate("Login");
 }
@@ -168,11 +168,12 @@ async showpicker(){
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
+      base64 :true
     });
-    console.log(result);
+    // alert(JSON.stringify(result.base64))
     if (!result.cancelled) {
       const source={uri:result.uri}
-      this.setState({imageSource:source,imageData:result})
+      this.setState({imageSource:source,imageData:result.base64})
       this.uploadinfprofile();
     }
  

@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage,ActivityIndicator} from "react-native";
 import {WebView} from 'react-native-webview'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './createStyle';
@@ -7,6 +7,12 @@ import Sm from './sm';
 import * as Font from 'expo-font';
 import header from './headerStyle';
 
+
+const Loader=()=>(
+  <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+)
 
 
 
@@ -36,7 +42,8 @@ export default class ProfUpdate2 extends Component{
          instaverified:false,
          ytverified:false,
          twitterverified:false,
-          fontLoaded:false
+          fontLoaded:false,
+          loading:false
         }
     }
 
@@ -103,10 +110,12 @@ export default class ProfUpdate2 extends Component{
       
           if (responseJson.valid){
             alert(responseJson.msg);
+            this.setState({loading:false})
             this.props.navigation.navigate("Home");
           }
         } catch (error) {
           alert(error);
+          this.setState({loading:false})
         }
       }
       
@@ -157,7 +166,7 @@ export default class ProfUpdate2 extends Component{
         
       }
     render(){
-
+      if (!this.state.loading){
         return(
             this.state.fontLoadedd ? (
             <ScrollView style={{backgroundColor:'#fff'}}>
@@ -386,7 +395,7 @@ export default class ProfUpdate2 extends Component{
 
 
            <View style={styles.btn_wrap}>
-              <TouchableOpacity style={styles.nextbtn} onPress={()=>this.submitinfplatform()}>
+              <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.submitinfplatform();this.setState({loading:true})}}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                    <Text style={styles.nextbtn_txt}>Next </Text>
                    <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
@@ -407,7 +416,10 @@ export default class ProfUpdate2 extends Component{
    </ScrollView>
 
    ):null
-        );
+        );}
+        else{
+          return <Loader />
+        }
     }
 }
 
