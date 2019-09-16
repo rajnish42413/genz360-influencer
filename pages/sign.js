@@ -317,7 +317,7 @@ export default class INFLUENCERDETAILS extends Component {
                   dateText: {
                     fontSize: 18,
                     fontFamily: 'SF',
-
+                    
                   }
 
                 }}

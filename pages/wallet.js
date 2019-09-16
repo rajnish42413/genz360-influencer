@@ -157,7 +157,7 @@ export default class Wallet extends Component{
 
             <View style={{flexDirection:'column',marginTop:20}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Transfer",{amount:this.state.amount})} style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center'}]} >
-                        <Image source={require('./bank.png')} style={{width:25,height:25}} />
+                        <Image source={require('./paytm.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Transfer to Paytm</Text>
                     </TouchableOpacity>
 
