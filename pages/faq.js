@@ -8,12 +8,6 @@ import * as Font from 'expo-font';
 import header from './headerStyle';
 
 
-
-
-
-
-
-
 export default class FAQ extends Component{
   
     constructor(props){

@@ -52,7 +52,7 @@ export default class Browse extends Component {
   }
   _storeData = async (key,val) => {
     try {
-      await AsyncStorage.setItem(key, val);
+      await AsyncStorage.setItem(key, val.val.toString());
     } catch (error) {
       // Error saving data
     }

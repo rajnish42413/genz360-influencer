@@ -10,10 +10,8 @@ import header from './headerStyle';
 
 
 const MyCampaign = (props) =>(
-   
-    <View style={{flexDirection:'column',flex:1,borderWidth:1,borderColor:'#dadada',marginTop:15,
+  <View style={{flexDirection:'column',flex:1,borderWidth:1,borderColor:'#dadada',marginTop:15,
     paddingTop:10,paddingLeft:10,paddingRight:10,paddingBottom:10,marginRight:5,marginLeft:5,borderRadius:8}}>
-
         <Text style={{fontSize:18,marginTop:5,fontFamily:'Gilroy-ExtraBold'}}>{props.item.subject}</Text>
         <Text style={{fontSize:16,fontFamily:'SF'}} >{props.item.message}</Text>
     </View>
@@ -46,7 +44,7 @@ export default class Notificationspage extends Component{
       }
       _storeData = async (key,val) => {
         try {
-          await AsyncStorage.setItem(key, val);
+          await AsyncStorage.setItem(key, val.toString());
         } catch (error) {
           // Error saving data
         }

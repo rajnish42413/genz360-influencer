@@ -27,7 +27,6 @@ export default class OTP extends Component {
   render(){
     return(
       <ScrollView style={styles.container}>
-
         <View style={styles.logowrap}>  
             <View style={styles.logo}>
                 <Image source ={require('./logo.png')} style={styles.logoimg}/>

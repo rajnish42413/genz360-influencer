@@ -97,9 +97,8 @@ async _getStorageValue(){
 }
 _storeData = async (key,val) => {
   try {
-    await AsyncStorage.setItem(key, val);
+    await AsyncStorage.setItem(key, val.toString());
   } catch (error) {
-    // Error saving data
     alert("Something went wrong")
   }
 };

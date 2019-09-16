@@ -6,12 +6,6 @@ import * as Font from 'expo-font';
 import header from './headerStyle';
 
 
-
-
-
-
-
-
 export default class About extends Component{
   
     constructor(props){

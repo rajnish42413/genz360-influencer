@@ -103,9 +103,8 @@ _submitlink=async ()=>{
       }),
     });
     
-    
+
     let responseJson = await response.json();
-    
     if (responseJson.valid){
       alert(responseJson.msg)
     }
@@ -129,7 +128,6 @@ componentDidMount(){
 
   render() {
     if (this.state.loaded){
-  
       return (
         
           <ScrollView style={{backgroundColor:'#fff'}}>

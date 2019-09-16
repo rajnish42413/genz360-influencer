@@ -66,6 +66,7 @@ async _getStorageValue(){
   this._campaigns();
   this._applied_status();
 }
+
 getPermissionAsync = async () => {
   if (Constants.platform.ios) {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);

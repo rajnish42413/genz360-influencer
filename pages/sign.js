@@ -70,11 +70,12 @@ export default class INFLUENCERDETAILS extends Component {
 
   _storeData = async (key, val) => {
     try {
-      await AsyncStorage.setItem(key, val);
+      await AsyncStorage.setItem(key, val.toString());
     } catch (error) {
-      // Error saving data
+      alert(error);
     }
   };
+  
   get_locations = async () => {
     try {
       let response = await fetch('http://www.genz360.com:81/get-matching-locations', {
@@ -87,9 +88,7 @@ export default class INFLUENCERDETAILS extends Component {
           search: this.state.location,
         }),
       });
-  
       let responseJson = await response.json();
-  
       if (responseJson.valid) {
         this.setState({ loactiondict: responseJson.result })
       }
