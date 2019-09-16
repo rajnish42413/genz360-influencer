@@ -6,12 +6,15 @@ export default StyleSheet.create({
         backgroundColor:'#121b74',
     },
 
+    
+
     name:{
         fontFamily:'SF',
         fontSize:16,
         color:'#000',
     },
-    
+
+
     wrap:{
         flexDirection:'row',
         justifyContent:'space-between',
