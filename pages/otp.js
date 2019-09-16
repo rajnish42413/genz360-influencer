@@ -26,7 +26,7 @@ export default class OTP extends Component {
   
   render(){
     return(
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container,{marginTop:0}]}>
 
         <View style={styles.logowrap}>  
             <View style={styles.logo}>
