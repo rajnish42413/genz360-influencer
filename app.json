@@ -19,11 +19,11 @@
       "backgroundColor": "#0C3084"
     },
     "platforms": [
-       "android"
-      ],
+      "android"
+    ],
     "description": "",
     "notification": {
-      "icon": "./images/notificationicon.png",
+      "icon": "./images/gi.png",
       "androidMode": "default"
     }
   }

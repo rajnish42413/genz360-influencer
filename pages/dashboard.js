@@ -90,7 +90,7 @@ _onRefresh = () => {
 async _getStorageValue(){
   let value = await AsyncStorage.getItem("tokken");
   this.setState({tokken:value.toString()});
-  this.registerForPushNotificationsAsync()
+  this.get_tokken_status()
   this.get_daily_task();
   this.get_live_campaigns();
   this.get_applied_campaigns();
@@ -126,6 +126,35 @@ _storeData = async (key,val) => {
 
         this.setState({task:true,dailytask:responseJson.dailytask})
         
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  get_tokken_status = async () => {
+    try {
+
+      let response = await fetch('http://www.genz360.com:81/inf-not-token', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tokken: this.state.tokken
+        }),
+      });
+
+      let responseJson = await response.json();
+
+      if (responseJson.valid) {
+
+        return
+        
+      }
+      else{
+        this.registerForPushNotificationsAsync()
       }
     } catch (error) {
       alert(error);
@@ -253,12 +282,6 @@ componentDidMount(){
     }
   } catch (error) {
     alert(error);
-  }
-  if (Platform.OS === 'android') {
-    Notifications.createChannelAndroidAsync('GenZ360', {
-      name: 'GenZ360',
-      sound: true,
-    });
   }
 }
 
