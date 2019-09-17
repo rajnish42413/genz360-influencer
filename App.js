@@ -136,9 +136,11 @@ export default class App extends Component{
 
   _storeData = async (key,val) => {
     try {
-      await AsyncStorage.setItem(key, val);
+      if(val && key){
+        await AsyncStorage.setItem(key, val.toString());
+     }
     } catch (error) {
-      // Error saving data
+      alert(error);
     }
   };
 
@@ -153,11 +155,10 @@ async componentDidMount() {
     this.setState({ fontLoaded: true });
   }
 
-  
+
 
   render(){
     const MainNavigator=AppNavigator(this.state);
-
      return this.state.fontLoaded ? <MainNavigator /> : null
    
   }

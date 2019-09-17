@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Dimensions,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, Platform,TextInput ,StyleSheet,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Dimensions,AsyncStorage} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import * as Font from 'expo-font';
@@ -97,7 +97,9 @@ async _getStorageValue(){
 }
 _storeData = async (key,val) => {
   try {
-    await AsyncStorage.setItem(key, val.toString());
+    if(val && key){
+      await AsyncStorage.setItem(key, val.toString());
+   }
   } catch (error) {
     alert("Something went wrong")
   }
@@ -130,6 +132,35 @@ _storeData = async (key,val) => {
       alert(error);
     }
   }
+
+  // get_tokken_status = async () => {
+  //   try {
+
+  //     let response = await fetch('http://www.genz360.com:81/inf-not-token', {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         tokken: this.state.tokken
+  //       }),
+  //     });
+
+  //     let responseJson = await response.json();
+
+  //     if (responseJson.valid) {
+
+  //       return
+        
+  //     }
+  //     else{
+  //       this.registerForPushNotificationsAsync()
+  //     }
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // }
 
   get_live_campaigns = async () => {
     try {
@@ -190,7 +221,13 @@ componentDidMount(){
     'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
     'SF': require('../assets/fonts/SF.ttf'),
   });
-  
+  if (Platform.OS === 'android') {
+    Notifications.createChannelAndroidAsync('reminders', {
+      name: 'Reminders',
+      sound: true,
+      priority: 'max',
+    });
+  }
 }
 
 
@@ -252,12 +289,6 @@ componentDidMount(){
     }
   } catch (error) {
     alert(error);
-  }
-  if (Platform.OS === 'android') {
-    Notifications.createChannelAndroidAsync('GenZ360', {
-      name: 'GenZ360',
-      sound: true,
-    });
   }
 }
 

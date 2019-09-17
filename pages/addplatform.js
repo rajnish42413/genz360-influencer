@@ -1,13 +1,16 @@
 import React , {Component} from 'react';
-import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage,ActivityIndicator} from "react-native";
 import {WebView} from 'react-native-webview'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './createStyle';
 import Sm from './sm';
 import * as Font from 'expo-font';
 import header from './headerStyle';
-
-
+const Loader=()=>(
+  <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+)
 
 
 
@@ -36,6 +39,7 @@ export default class AddPlatform extends Component{
          instaverified:false,
          ytverified:false,
          twitterverified:false,
+         loading:false
         }
     }
 
@@ -48,9 +52,11 @@ export default class AddPlatform extends Component{
       
       _storeData = async (key,val) => {
         try {
-          await AsyncStorage.setItem(key, val);
+          if(val && key){
+            await AsyncStorage.setItem(key, val.toString());
+         }
         } catch (error) {
-          // Error saving data
+          alert(error);
         }
       };
       
@@ -79,10 +85,16 @@ export default class AddPlatform extends Component{
           let responseJson = await response.json();
       
           if (responseJson.valid){
+            this.setState({loading:false})
             this.props.navigation.navigate("Home");
+          }
+          else{
+            alert(responseJson.err)
+            this.setState({loading:false})
           }
         } catch (error) {
           alert(error)
+          this.setState({loading:false})
         }
       }
       
@@ -157,18 +169,19 @@ export default class AddPlatform extends Component{
         
       }
     render(){
-
+      if (!this.state.loading){
         return(
             <ScrollView style={{backgroundColor:'#fff'}}>
           <View style={header.header_wrapper}>
           <View style={header.wrap}>
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate('Profile')}>
+           <TouchableOpacity onPress={()=>this.props.navigation.navigate('Profile')}>
             <Icon  style={styles.backbtn} name="arrow-left" size={24} color="#fff" />
             </TouchableOpacity>
               <Text style={header.tagline}>Cash{'\n'}Your Connect</Text>
           </View>
 
           <ScrollView style={[styles.createSection,{backgroundColor:'#fff'}]}>
+
               <Text style={header.heading_normal} >Add Platform (Please Authenticate)</Text>
 
 
@@ -320,16 +333,20 @@ export default class AddPlatform extends Component{
         {
             this.state.yt ? 
                 <View>
-                    <View style={styles.subwrap}>
+                    <View style={[styles.subwrap,{flexDirection:'row',justifyContent:'space-between'}]}>
 
                   
                      <TextInput
-                        style={styles.input}
+                        style={[styles.input,{flex:0.7,paddingLeft:5}]}
                         placeholder="USER ID"
                         onChangeText={(ytid) => {this.setState({ytid:ytid})}}
                         value={this.state.ytid}
                         underlineColorAndroid="transparent"
                     />
+
+                  {/* <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                      <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
+                  </TouchableOpacity> */}
 
                     </View> 
                     </View>:null
@@ -359,15 +376,20 @@ export default class AddPlatform extends Component{
         {
             this.state.twitter ? 
                 <View>
-                    <View style={styles.subwrap}>
+                    <View style={[styles.subwrap,{flexDirection:'row',justifyContent:'space-between'}]}>
                   
                    <TextInput
-                        style={styles.input}
+                        style={[styles.input,{flex:0.7,paddingLeft:5}]}
                         placeholder="USER ID"
                         onChangeText={(twitterid) => {this.setState({twitterid:twitterid})}}
                         value={this.state.twitterid}
                         underlineColorAndroid="transparent"
                         />
+
+                  {/* <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                      <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
+                  </TouchableOpacity> */}
+                  
                     </View> 
                     </View>:null
 
@@ -386,16 +408,12 @@ export default class AddPlatform extends Component{
 
 
            <View style={styles.btn_wrap}>
-              <TouchableOpacity style={styles.nextbtn} onPress={()=>this.submitinfplatform()}>
+              <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.submitinfplatform();this.setState({loading:true})}}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                    <Text style={styles.nextbtn_txt}>Next </Text>
                    <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
                   </View>
              </TouchableOpacity>
-{/* 
-          <TouchableOpacity style={styles.cancelbtn}>
-             <Text style={styles.cancelbtn_txt}>Cancel</Text>
-          </TouchableOpacity> */}
 
           </View>
 
@@ -405,7 +423,10 @@ export default class AddPlatform extends Component{
      
    </View>
    </ScrollView>
-        );
+        );}
+        else{
+          return <Loader />
+        }
     }
 }
 

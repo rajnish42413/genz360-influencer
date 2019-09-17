@@ -98,7 +98,9 @@ async _getStorageValue(){
 }
 _storeData = async (key,val) => {
   try {
-    await AsyncStorage.setItem(key, val.toString());
+    if(val && key){
+      await AsyncStorage.setItem(key, val.toString());
+   }
   } catch (error) {
     alert(error);
   }
@@ -235,7 +237,7 @@ uploadinfprofile=async()=>{
 
             <View style={styles.list}>
               
-                <TouchableOpacity style={{flexDirection:'row',borderWidth:1,borderColor:'#eee'}}  onPress={()=>this.props.navigation.navigate("InfCard",{name:this.state.loadedval.name,number:this.state.loadedval.contact,email:this.state.loadedval.email,profile_photo:this.state.loadedval.profile_photo})}>
+                <TouchableOpacity style={{flexDirection:'row',borderWidth:1,borderColor:'#eee'}}  onPress={()=>this.props.navigation.navigate("InfCard",{tokken:this.state.tokken,uid:this.state.loadedval.uid,name:this.state.loadedval.name,number:this.state.loadedval.contact,email:this.state.loadedval.email,profile_photo:this.state.loadedval.profile_photo})}>
               <View style={styles.list_item_wrap}>
               <Image source={require('./card.png')}  style={{width:25,height:25}}/>
               <Text style={styles.list_item}>Influencer Card</Text>

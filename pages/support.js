@@ -6,11 +6,6 @@ import header from './headerStyle';
 
 
 
-
-
-
-
-
 export default class Support extends Component{
   
     constructor(props){

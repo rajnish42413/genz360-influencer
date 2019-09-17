@@ -50,7 +50,8 @@ export default class Campaign extends Component {
       vid:false,
       vidval:'',
       imageData:'',
-      img:false
+      img:false,
+      loading:false
     };
 }
 _onRefresh = () => {
@@ -107,7 +108,7 @@ _campaigns=async ()=>{
 
 _apply_for_campaign = async()=>{
   try {
-    
+    this.setState({loading:true})
     let response = await fetch('http://www.genz360.com:81/apply-for-campaign',{
       method: 'POST',
       headers: {
@@ -124,13 +125,16 @@ _apply_for_campaign = async()=>{
     let responseJson = await response.json();
     
     if (responseJson.valid){
+      this.setState({loading:false})
       this.setState({applied:'green',applied_text:"Applied",status:true})
     }
     else{
-      alert("Campaign Full, Check for something else");
+      alert(responseJson.err);
+      this.setState({loading:false})
     }
   } catch (error) {
     alert(error)
+    this.setState({loading:false})
   }
 }
 
@@ -159,13 +163,16 @@ _submit_creative = async()=>{
     let responseJson = await response.json();
     
     if (responseJson.valid){
+      this.setState({loading:false})
       this.setState({applied:'green',applied_text:"Applied",status:true})
     }
     else{
-      alert("Campaign Full, Check for something else");
+      alert(responseJson.err);
+      this.setState({loading:false})
     }
   } catch (error) {
     alert(error)
+    this.setState({loading:false})
   }
 }
 
@@ -255,7 +262,7 @@ componentDidMount(){
                 </View>
 
                 <View style={styles.desc_wrap}>
-                    <Text style={styles.desc_txt}>{this.state.campaign.desc}</Text>
+                    <Text style={styles.desc_txt} selectable={true}>{this.state.campaign.desc}</Text>
                 </View>
 
                 
@@ -321,12 +328,7 @@ componentDidMount(){
                             onValueChange={(img)=>this.setState({img:!this.state.img})}/>     
                             <Text style={header.name}>Image</Text>      
                     </View>:null}
-                    {
-                      this.state.imageData!==null
-                      ?
-                      <Image source={{uri:this.state.imageSource}} style={{height:200,width:200}} />:
-                      null
-                      }
+                    
                     {
                       this.state.img && this.state.campaign.subtype==='4'?
                       <View style={[styles.inputSection_icon,{marginLeft:'5%',marginRight:'5%'}]}>
@@ -335,7 +337,13 @@ componentDidMount(){
                           </TouchableOpacity>
                             <Image source={{uri:'http://www.genz360.com:81/get-image/'+this.state.photo+ '?rnd=' + Math.random()}} style={styles.prof_img}/>
                    </View> :null
-                    }   
+                    }
+                    {
+                      this.state.imageData!==null && this.state.img && this.state.campaign.subtype==='4'
+                      ?
+                      <Image source={this.state.imageSource} style={{height:200,width:200}} />:
+                      null
+                      }   
 
 
                 </View> 
@@ -346,7 +354,7 @@ componentDidMount(){
                
         </ScrollView>
 
-        {(this.state.campaign.subtype==='4' ||this.state.campaign.subtype==='6') && this.state.status ?<TouchableOpacity style={{backgroundColor:'blue',marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} onPress={()=>this._submit_creative()}>
+        {(this.state.campaign.subtype==='4' ||this.state.campaign.subtype==='6') && this.state.status ?<TouchableOpacity style={{backgroundColor:'blue',marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} onPress={()=>{this._submit_creative();this.setState({loading:true})}}>
           <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Submit Creative</Text>
         </TouchableOpacity>:null
 }

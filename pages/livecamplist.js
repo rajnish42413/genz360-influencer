@@ -47,7 +47,9 @@ export default class LiveCampList extends Component {
   }
   _storeData = async (key,val) => {
     try {
-      await AsyncStorage.setItem(key, val.toString());
+      if(val && key){
+        await AsyncStorage.setItem(key, val.toString());
+     }
     } catch (error) {
       alert(error);
     }
@@ -116,11 +118,20 @@ componentDidMount(){
                   </View>
 
             <View style={{ flex: 1, paddingBottom: 20 }}>
+            {
+                    this.state.campaign.length===0?
+                      <View style={{flexDirection:'column',alignItems:'center',marginTop:'40%'}}>
+                          <Image source={require('./nocamp.png')} style={{height:150,width:150}} />
+                          <Text style={{fontFamily:'SF',color:'#a9a9a9',fontSize:18,marginTop:10}}>No Live Campaigns</Text>
+                      </View>
+                    :   
               <FlatList
                 data={this.state.campaign}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => <Campaign item={item} navigation={this.props.navigation} />}
               />
+
+            }
             </View>
 
           </ScrollView>

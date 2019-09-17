@@ -17,7 +17,7 @@ export default class Transfer extends Component{
     constructor(props){
         super(props);
         this.state={
-            num:0,
+            num:'',
             msg:'',
             amount:this.props.navigation.state.params.amount,
         };
@@ -30,11 +30,11 @@ export default class Transfer extends Component{
     
     
         if (this.state.num.length===10){
-          alert("Checked")
           this._transfer();
+          this.setState({msg:''});
         }
         else{
-          alert('Enter Valid Number')
+          this.setState({msg:'Enter Valid Number'})
         }
       }
 
@@ -46,9 +46,11 @@ export default class Transfer extends Component{
       }
       _storeData = async (key,val) => {
         try {
-          await AsyncStorage.setItem(key, val.toString());
+          if(val && key){
+            await AsyncStorage.setItem(key, val.toString());
+         }
         } catch (error) {
-          // Error saving data
+          alert(error);
         }
       };
       
@@ -121,7 +123,6 @@ export default class Transfer extends Component{
             <Image source={require('./paytm.png')} style={{width:50,height:50}} />
             <Text style={{fontSize:17,fontFamily:'SF',color:'#000',marginLeft:0,}}>Enter Paytm Number to transfer money to your paytm wallet</Text>
             </View>
-            <Text style={{textAlign:'left',marginTop:5,fontSize:15,fontFamily:'SF',color:'#eb7070'}}>{this.state.msg}</Text>
 
 
                 <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -130,6 +131,7 @@ export default class Transfer extends Component{
                 </View>
 
             <View style={{marginTop:'5%'}}></View>
+            <Text style={{textAlign:'left',marginTop:5,fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.msg}</Text>
             <View style={styles.inputSection_icon}>
                 {/* <Icon style={styles.icon} name="phone" size={24} color="#dadada" /> */}
                 {/* <Image source={require('./paytm.png')} style={{width:20,height:30}} /> */}

@@ -32,7 +32,7 @@ export default class INFDETAILS extends Component {
     try {
       await AsyncStorage.setItem(key, val.toString());
     } catch (error) {
-      // Error saving data
+      alert(error);
     }
   };
 

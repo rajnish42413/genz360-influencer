@@ -60,9 +60,11 @@ export default class Wallet extends Component{
       }
       _storeData = async (key,val) => {
         try {
-          await AsyncStorage.setItem(key, val.toString());
+          if(val && key){
+            await AsyncStorage.setItem(key, val.toString());
+         }
         } catch (error) {
-          // Error saving data
+          alert(error);
         }
       };
       
@@ -128,13 +130,16 @@ export default class Wallet extends Component{
           </View>
 
           <View style={[header.createSection,{paddingBottom:30,borderBottomWidth:1,borderColor:'#dadada'}]}>
-            <ImageBackground style={{width:'100%'}} source={require('./gz.png')}>
+            {/* <ImageBackground style={{width:'100%'}} source={require('./gz.png')}> */}
           <Text style={header.heading_normal} >GZ Wallet </Text>
 
 
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}> 
-                    
-                    <Text style={styles.bal}>{this.state.amount}</Text> 
+                <View style={{flexDirection:'row',justifyContent:'center',marginTop:'7%'}}> 
+                    <View style={{flexDirection:'column',alignItems:'center'}}>
+                      <Image source={require('./bucks.png')} style={{width:60,height:60}}/>
+                      
+                        <Text style={styles.bal}>{'\u20B9'} {this.state.amount}</Text> 
+                    </View>
                 </View>
 
                 {/* <View style={styles.info}>
@@ -154,8 +159,8 @@ export default class Wallet extends Component{
 
             <View style={{flexDirection:'column',marginTop:20}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Transfer",{amount:this.state.amount})} style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center'}]} >
-                        <Image source={require('./bank.png')} style={{width:25,height:25}} />
-                        <Text style={styles.transfer_btn_txt}>Transfer to Bank</Text>
+                        <Image source={require('./paytm.png')} style={{width:25,height:25}} />
+                        <Text style={styles.transfer_btn_txt}>Transfer to Paytm</Text>
                     </TouchableOpacity>
 
                     {/* <TouchableOpacity  onPress={()=>alert("Coming Soon")} style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center'}]}>
@@ -164,7 +169,7 @@ export default class Wallet extends Component{
                     </TouchableOpacity> */}
                 </View>
        
-                </ImageBackground>
+                {/* </ImageBackground> */}
                 </View>
           </View>
             <ScrollView>

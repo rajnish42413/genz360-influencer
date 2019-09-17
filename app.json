@@ -23,7 +23,7 @@
     ],
     "description": "",
     "notification": {
-      "icon": "./images/notificationicon.png",
+      "icon": "./images/logo.png",
       "androidMode": "default"
     }
   }

@@ -47,7 +47,9 @@ _onRefresh = () => {
 
   _storeData = async (key, val) => {
     try {
-      await AsyncStorage.setItem(key, val.val.toString());
+      if(val && key){
+        await AsyncStorage.setItem(key, val.toString());
+     }
     } catch (error) {
       alert(error);
     }

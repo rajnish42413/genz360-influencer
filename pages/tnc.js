@@ -7,11 +7,6 @@ import header from './headerStyle';
 
 
 
-
-
-
-
-
 export default class TNC extends Component{
   
     constructor(props){

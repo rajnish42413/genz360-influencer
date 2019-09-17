@@ -57,7 +57,7 @@ export default class ProfUpdate2 extends Component{
         try {
           await AsyncStorage.setItem(key, val.toString());
         } catch (error) {
-          // Error saving data
+          alert(error);
         }
       };
 
@@ -112,6 +112,9 @@ export default class ProfUpdate2 extends Component{
             alert(responseJson.msg);
             this.setState({loading:false})
             this.props.navigation.navigate("Home");
+          }else{
+            alert(responseJson.err)
+            this.setState({loading:false})
           }
         } catch (error) {
           alert(error);

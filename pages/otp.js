@@ -26,7 +26,8 @@ export default class OTP extends Component {
   
   render(){
     return(
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container,{marginTop:0}]}>
+        
         <View style={styles.logowrap}>  
             <View style={styles.logo}>
                 <Image source ={require('./logo.png')} style={styles.logoimg}/>
@@ -46,6 +47,7 @@ export default class OTP extends Component {
                  keyboardType={'numeric'}
                  onChangeText={(contact) => {this.setState({contact:contact})}}
                  value={this.state.contact}
+                 maxLength={4}
                  underlineColorAndroid="transparent"
                 />
          </View>

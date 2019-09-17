@@ -17,13 +17,6 @@ export default class Web extends Component {
   }
 
 
-
-
-
- 
-
-
-
   render(){
     return(
       <ScrollView style={styles.container}>

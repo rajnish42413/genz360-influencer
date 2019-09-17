@@ -44,9 +44,11 @@ export default class Notificationspage extends Component{
       }
       _storeData = async (key,val) => {
         try {
-          await AsyncStorage.setItem(key, val.toString());
+          if(val && key){
+            await AsyncStorage.setItem(key, val.toString());
+         }
         } catch (error) {
-          // Error saving data
+          alert(error);
         }
       };
       

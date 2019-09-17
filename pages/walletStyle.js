@@ -12,9 +12,9 @@ export default StyleSheet.create({
 
         bal:{
           fontSize:40,
-          fontFamily:'Gilroy-ExtraBold',
+          fontFamily:'SF',
           marginTop:20,
-          marginLeft:10, 
+          marginLeft:0, 
           color:'#000' 
         },
 

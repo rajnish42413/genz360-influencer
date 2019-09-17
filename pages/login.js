@@ -20,17 +20,12 @@ export default class Login extends Component {
       token:null,
       current_screen:"",
       numValid:true,
-      loading:false
+      loading:false,
+      msg:'',
     }
   }
 
-  valid = () =>{
-    if(this.state.contact.length!=10){
-      this.setState({numValid:false});
-    }else{
-      this.setState({numValid:true})
-    }
-  }
+ 
 
   async _getStorageValue(){
     let value = await AsyncStorage.getItem("current_screen");
@@ -53,7 +48,9 @@ export default class Login extends Component {
 
   _storeData = async (key,val) => {
     try {
-      await AsyncStorage.setItem(key, val);
+      if(val && key){
+        await AsyncStorage.setItem(key, val.toString());
+     }
     } catch (error) {
       alert(error);
     }
@@ -100,6 +97,17 @@ export default class Login extends Component {
     });
   }
 
+  nameCheck = () => {
+
+    if (this.state.contact.length===10){
+      this.login();
+      this.setState({loading:true,msg:''});
+    }else{
+      this.setState({msg:'Enter Valid Number'})
+    }
+  
+  }
+
 
   render(){
     if (this.state.current_screen===""){
@@ -121,9 +129,9 @@ export default class Login extends Component {
           <Text style={styles.wel_txt}>Welcome!{'\n'} <Text style={{color:'#f96d15'}}>Signup</Text> To Continue</Text>
         </View>
 
-        {!this.state.numValid ? <Text style={{textAlign:'left',marginLeft:'5%',marginTop:18,fontSize:15,fontFamily:'SF',color:'#eb7070'}}>Enter a 10 digit Number</Text> 
-        : null }
-      <View style={[styles.input_wrap,{marginTop:10}]}>
+        <Text style={{textAlign:'left',marginLeft:'5%',marginTop:7,fontSize:14,fontFamily:'SF',color:'#eb7070'}}>{this.state.msg}</Text> 
+
+      <View style={[styles.input_wrap,{marginTop:0}]}>
         <View style={styles.inputSection_icon}>
             <Icon style={styles.icon} name="phone" size={24} color="#dadada" />
             <TextInput
@@ -140,7 +148,7 @@ export default class Login extends Component {
         
               
 
-                  <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.login();this.setState({loading:true})}}>
+                  <TouchableOpacity style={styles.nextbtn} onPress={this.nameCheck}>
                         <View style={{flexDirection:'row',alignItems:'center'}}>
                          <Text style={styles.nextbtn_txt}>NEXT</Text>
                          <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   

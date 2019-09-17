@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {
-  SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image , ImageBackground , TextInput ,TouchableOpacity,Share} from 'react-native';
+  SafeAreaView,StyleSheet,ScrollView,View,Text,StatusBar,Image,Platform , ImageBackground , TextInput ,TouchableOpacity,Share} from 'react-native';
   import Icon from 'react-native-vector-icons/FontAwesome5';
 import header from './headerStyle';
-import ViewShot from 'react-native-view-shot';
+import ViewShot , {captureRef} from 'react-native-view-shot';
 import * as Font from 'expo-font';
 
 const shareOptions ={
@@ -13,6 +13,23 @@ const shareOptions ={
     subject:'CARD'
 
 };
+
+
+const format = Platform.OS === "android" ? "raw" : "png";
+const result = Platform.OS === "android" ? "zip-base64" : "base64";
+ 
+
+
+// captureRef(this.ref, { result, format }).then(data => {
+//   const resolution = /^(\d+):(\d+)\|/g.exec(data);
+//   const width = (resolution || ["", 0, 0])[1];
+//   const height = (resolution || ["", 0, 0])[2];
+//   const base64 = data.substr((resolution || [""])[0].length || 0);
+  
+//   alert(base64);
+// });
+
+
 
 export default class InfCard extends Component {
 
@@ -50,11 +67,58 @@ onCapture= (uri)=> {
         });
     });
   }
-  onCapture2= (uri)=> {
-    this.refs.viewShot.capture().then(uri => {
-        this.onShare(uri) 
+//   onCapture2= (uri)=> {
+//     this.refs.viewShot.capture().then(uri => {
+//         this.onShare(uri) 
+//     });
+//   }
+
+  onCapture2= ()=> {
+      let base64;
+    captureRef(this.refs.myviewshot,{
+        result:"base64"
+    }).then(data => {
+        // expected pattern 'width:height|', example: '1080:1731|'
+        const resolution = /^(\d+):(\d+)\|/g.exec(data);
+        // const width = (resolution || ["", 0, 0])[1];
+        // const height = (resolution || ["", 0, 0])[2];
+        base64 = data.substr((resolution || [""])[0].length || 0);
+        this.uploadinfcard(base64)
+        // this.onShare(base64)
+        // alert(base64)
     });
   }
+
+
+  uploadinfcard=async(imageData)=>{
+    try {
+      let response = await fetch('http://www.genz360.com:81/inf-gzid-wallet',{
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tokken: this.props.navigation.state.params.tokken,
+          imageData:imageData
+        }),
+      });
+      
+      let responseJson = await response.json();
+  
+      if (responseJson.valid){
+        // alert(responseJson.msg)
+        this.onShare(responseJson.msg) 
+      }
+      else{
+        alert(responseJson.err);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+
 
 
   render(){
@@ -76,11 +140,11 @@ onCapture= (uri)=> {
           <View style={styles.camp_img_wrap}>
             
 
-          <ViewShot ref="viewShot" options={{format:"jpg", quality:0.9}}>
+          <ViewShot ref="myviewshot" options={{format:"jpg", quality:0.9}}>
             <ImageBackground source={require('./infcard.png')} style={styles.camp_img}>
                     <View style={{flexDirection:'row',justifyContent:'space-between',marginRight:30,paddingTop:5}}>        
                             <Text ></Text>
-                            <Text style={styles.txt}>Gz Id: 138647923147</Text>
+                            <Text style={styles.txt}>Gz Id: GENZID{this.props.navigation.state.params.uid}</Text>
                     </View>
 
                     <View style={{marginTop:30}}>
@@ -119,19 +183,21 @@ onCapture= (uri)=> {
             </View> */}
 
                 <View style={{flexDirection:'column',marginTop:20}}>
-                    {/* <TouchableOpacity onPress={()=>this.onCapture2()} 
+                    <TouchableOpacity onPress={()=>this.onCapture2()} 
                         style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center',
                         borderBottomWidth:1,borderTopWidth:1,borderTopColor:'#dadada',borderBottomColor:'#dadada'}]}>
                         
                         <Image source={require('./share.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Share</Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>this.onCapture()}
-                            style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center',borderBottomWidth:1,borderColor:'#dadada'}]}>
+                    {/* <TouchableOpacity 
+                    // onPress={()=>this.onCapture()}
+                    onPress={()=>this.onCapture2()}
+                    style={[styles.transfer_btn,{flexDirection:'row',alignItems:'center',borderBottomWidth:1,borderColor:'#dadada'}]}>
                     <Image source={require('./download.png')} style={{width:25,height:25}} />
                         <Text style={styles.transfer_btn_txt}>Download</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
         </View>
 
