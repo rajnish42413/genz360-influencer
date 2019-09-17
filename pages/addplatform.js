@@ -329,9 +329,9 @@ export default class AddPlatform extends Component{
                         underlineColorAndroid="transparent"
                     />
 
-                  <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                  {/* <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
                       <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
 
                     </View> 
                     </View>:null
@@ -371,9 +371,9 @@ export default class AddPlatform extends Component{
                         underlineColorAndroid="transparent"
                         />
 
-                  <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
+                  {/* <TouchableOpacity style={[styles.nextbtn,{flex:0.3}]} >
                       <Text style={[styles.nextbtn_txt,{fontSize:15}]}>Verify</Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                   
                     </View> 
                     </View>:null
@@ -392,7 +392,7 @@ export default class AddPlatform extends Component{
 
 
 
-           {/* <View style={styles.btn_wrap}>
+           <View style={styles.btn_wrap}>
               <TouchableOpacity style={styles.nextbtn} onPress={()=>this.submitinfplatform()}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                    <Text style={styles.nextbtn_txt}>Next </Text>
@@ -400,7 +400,7 @@ export default class AddPlatform extends Component{
                   </View>
              </TouchableOpacity>
 
-          </View> */}
+          </View>
 
           </View>
 

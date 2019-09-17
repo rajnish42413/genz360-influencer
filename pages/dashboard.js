@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Dimensions,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, Platform,TextInput ,StyleSheet,RefreshControl ,FlatList ,TouchableOpacity ,Image ,Dimensions,AsyncStorage} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import * as Font from 'expo-font';
@@ -90,7 +90,7 @@ _onRefresh = () => {
 async _getStorageValue(){
   let value = await AsyncStorage.getItem("tokken");
   this.setState({tokken:value.toString()});
-  this.get_tokken_status()
+  this.registerForPushNotificationsAsync()
   this.get_daily_task();
   this.get_live_campaigns();
   this.get_applied_campaigns();
@@ -132,34 +132,34 @@ _storeData = async (key,val) => {
     }
   }
 
-  get_tokken_status = async () => {
-    try {
+  // get_tokken_status = async () => {
+  //   try {
 
-      let response = await fetch('http://www.genz360.com:81/inf-not-token', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          tokken: this.state.tokken
-        }),
-      });
+  //     let response = await fetch('http://www.genz360.com:81/inf-not-token', {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         tokken: this.state.tokken
+  //       }),
+  //     });
 
-      let responseJson = await response.json();
+  //     let responseJson = await response.json();
 
-      if (responseJson.valid) {
+  //     if (responseJson.valid) {
 
-        return
+  //       return
         
-      }
-      else{
-        this.registerForPushNotificationsAsync()
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
+  //     }
+  //     else{
+  //       this.registerForPushNotificationsAsync()
+  //     }
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // }
 
   get_live_campaigns = async () => {
     try {
@@ -220,7 +220,13 @@ componentDidMount(){
     'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
     'SF': require('../assets/fonts/SF.ttf'),
   });
-  
+  if (Platform.OS === 'android') {
+    Notifications.createChannelAndroidAsync('reminders', {
+      name: 'Reminders',
+      sound: true,
+      priority: 'max',
+    });
+  }
 }
 
 

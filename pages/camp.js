@@ -262,7 +262,7 @@ componentDidMount(){
                 </View>
 
                 <View style={styles.desc_wrap}>
-                    <Text style={styles.desc_txt}>{this.state.campaign.desc}</Text>
+                    <Text style={styles.desc_txt} selectable={true}>{this.state.campaign.desc}</Text>
                 </View>
 
                 

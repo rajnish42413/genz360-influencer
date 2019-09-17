@@ -40,6 +40,7 @@ export default class OTP extends Component {
   verifyotp=async ()=>{
     if(this.state.otp==="" || this.state.otp.length!==4){
       alert("invalid otp");
+      this.setState({loading:false})
       return;
     }
         try {
