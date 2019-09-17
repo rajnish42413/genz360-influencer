@@ -112,6 +112,9 @@ export default class ProfUpdate2 extends Component{
             alert(responseJson.msg);
             this.setState({loading:false})
             this.props.navigation.navigate("Home");
+          }else{
+            alert(responseJson.err)
+            this.setState({loading:false})
           }
         } catch (error) {
           alert(error);

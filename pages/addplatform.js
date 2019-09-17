@@ -1,11 +1,17 @@
 import React , {Component} from 'react';
-import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, TextInput ,StyleSheet,Alert ,FlatList ,TouchableOpacity ,Image ,CheckBox ,Modal,AsyncStorage,ActivityIndicator} from "react-native";
 import {WebView} from 'react-native-webview'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './createStyle';
 import Sm from './sm';
 import * as Font from 'expo-font';
 import header from './headerStyle';
+const Loader=()=>(
+  <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+)
+
 
 
 export default class AddPlatform extends Component{
@@ -33,6 +39,7 @@ export default class AddPlatform extends Component{
          instaverified:false,
          ytverified:false,
          twitterverified:false,
+         loading:false
         }
     }
 
@@ -76,10 +83,16 @@ export default class AddPlatform extends Component{
           let responseJson = await response.json();
       
           if (responseJson.valid){
+            this.setState({loading:false})
             this.props.navigation.navigate("Home");
+          }
+          else{
+            alert(responseJson.err)
+            this.setState({loading:false})
           }
         } catch (error) {
           alert(error)
+          this.setState({loading:false})
         }
       }
       
@@ -154,7 +167,7 @@ export default class AddPlatform extends Component{
         
       }
     render(){
-
+      if (!this.state.loading){
         return(
             <ScrollView style={{backgroundColor:'#fff'}}>
           <View style={header.header_wrapper}>
@@ -393,7 +406,7 @@ export default class AddPlatform extends Component{
 
 
            <View style={styles.btn_wrap}>
-              <TouchableOpacity style={styles.nextbtn} onPress={()=>this.submitinfplatform()}>
+              <TouchableOpacity style={styles.nextbtn} onPress={()=>{this.submitinfplatform();this.setState({loading:true})}}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                    <Text style={styles.nextbtn_txt}>Next </Text>
                    <Icon name="arrow-right" size={16} color="#fff" style={{paddingLeft:10}}/>   
@@ -408,7 +421,10 @@ export default class AddPlatform extends Component{
      
    </View>
    </ScrollView>
-        );
+        );}
+        else{
+          return <Loader />
+        }
     }
 }
 
