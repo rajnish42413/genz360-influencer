@@ -6,7 +6,7 @@
     "slug": "GenZ360",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "version": "1.2.1",
+    "version": "1.2.6",
     "icon": "./images/gi.png",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "ios": {
