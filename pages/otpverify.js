@@ -38,12 +38,14 @@ export default class OTP extends Component {
   }
 
   verifyotp=async ()=>{
-       if(this.state.otp == "" || this.state.otp.length !== 4){
-         alert("Invalid OTP");
-         this.setState({loading:false});
-       }
+    if(this.state.otp==="" || this.state.otp.length!==4){
+      alert("invalid otp");
+      this.setState({loading:false})
+      return;
+    }
         try {
-        let response = await fetch('http://www.genz360.com:81/verify-otp-inf',{
+      
+      let response = await fetch('http://www.genz360.com:81/verify-otp-inf',{
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -54,22 +56,26 @@ export default class OTP extends Component {
           tokken: this.state.tokken
         }),
       });
-        let responseJson = await response.json();
-         if (responseJson.valid && responseJson.updated){
-            this.setState({loading:false})
-            this.props.navigation.navigate("Home");  
-         }
+      
+      let responseJson = await response.json();
+  
+      if (responseJson.valid && responseJson.updated){
+        this.setState({loading:false})
+          this.props.navigation.navigate("Home");  
+      }
         else if(responseJson.valid && !responseJson.updated){
           this.setState({loading:false})
           this.props.navigation.navigate("INFDETAILS");
         }
-       else{
-         alert(responseJson.err);
-         this.setState({loading:false})
-       }
+      
+      else{
+        alert(responseJson.err);
+        this.setState({loading:false})
+      }
     } catch (error) {
-      alert(error);
+      alert("Some thing went wrong!!!");
       this.setState({loading:false})
+
     }
   }
 

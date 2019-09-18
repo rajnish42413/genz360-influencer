@@ -6,20 +6,30 @@
     "slug": "GenZ360",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "version": "1.2.6",
+    "version": "8.0.2",
     "icon": "./images/gi.png",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "ios": {
-      "bundleIdentifier": "com.genz360.influencer"
+      "bundleIdentifier": "com.genz360.influencer",
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.genz360.influencer"
+      "package": "com.genz360_inf",
+      "versionCode": 9,
+      "permissions": [
+        "CAMERA",
+        "INTERNET",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "SYSTEM_ALERT_WINDOW"
+      ]
     },
     "androidStatusBar": {
       "backgroundColor": "#0C3084"
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "description": "",
     "notification": {

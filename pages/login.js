@@ -44,15 +44,13 @@ export default class Login extends Component {
       this.setState({current_screen:"Login"})
     }
     
+    
   }
-
   _storeData = async (key,val) => {
     try {
-      if(val && key){
-        await AsyncStorage.setItem(key, val.toString());
-     }
+      await AsyncStorage.setItem(key, val);
     } catch (error) {
-      alert(error);
+      // Error saving data
     }
   };
 
@@ -72,9 +70,11 @@ export default class Login extends Component {
           mobile_no: this.state.contact,
         }),
       });
+      
       let responseJson = await response.json();
+  
       if (responseJson.valid){
-        this._storeData('tokken', String(JSON.stringify(responseJson.tokken) ));
+        this._storeData('tokken',responseJson.tokken)
         this.setState({loading:false})
         this.props.navigation.navigate("OTPVERIFY");
       }
@@ -83,11 +83,11 @@ export default class Login extends Component {
         this.setState({loading:false})
       }
     } catch (error) {
+      //console.error(error);
       alert(error)
       this.setState({loading:false})
     }
   }
-
   componentWillMount(){
     this._getStorageValue();
     Font.loadAsync({
