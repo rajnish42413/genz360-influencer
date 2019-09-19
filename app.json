@@ -1,39 +1,39 @@
 {
-    "name": "GenZ360",
-    "displayName": "Genz360",
-    "expo": {
-        "name": "Genz360",
-        "slug": "GenZ360",
-        "privacy": "unlisted",
-        "sdkVersion": "34.0.0",
-        "version": "7.0.1",
-        "icon": "./images/gi.png",
-        "entryPoint": "node_modules/expo/AppEntry.js",
-        "ios": {
-            "bundleIdentifier": "com.genz360.influencer",
-            "supportsTablet": true
-        },
-        "android": {
-            "package": "com.influencer",
-            "permissions": [
-                "CAMERA",
-                "INTERNET",
-                "READ_EXTERNAL_STORAGE",
-                "WRITE_EXTERNAL_STORAGE",
-                "SYSTEM_ALERT_WINDOW"
-            ]
-        },
-        "androidStatusBar": {
-            "backgroundColor": "#0C3084"
-        },
-        "platforms": [
-            "android",
-            "ios"
-        ],
-        "description": "",
-        "notification": {
-            "icon": "./images/logo.png",
-            "androidMode": "default"
-        }
+  "name": "GenZ360",
+  "displayName": "Genz360",
+  "expo": {
+    "name": "Genz360",
+    "slug": "GenZ360",
+    "privacy": "unlisted",
+    "sdkVersion": "34.0.0",
+    "version": "8.1.1",
+    "icon": "./images/gi.png",
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "ios": {
+      "bundleIdentifier": "com.genz360.influencer",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.influencer",
+      "permissions": [
+        "CAMERA",
+        "INTERNET",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#111B74"
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "description": "",
+    "notification": {
+      "icon": "./images/logo.png",
+      "androidMode": "default"
     }
+  }
 }

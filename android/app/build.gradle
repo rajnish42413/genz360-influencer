@@ -105,20 +105,24 @@ android {
         versionCode 8
         versionName "2.0"
     }
-    splits {
+
+  splits {
         abi {
             reset()
-            enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            enable true
+            universalApk false
+            include "armeabi-v7a", "x86"
         }
     }
-    buildTypes {
+  
+  buildTypes {
         release {
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -139,6 +143,7 @@ android {
 }
 
 dependencies {
+    implementation project(':rn-fetch-blob')
     implementation project(':react-native-webview')
     implementation project(':react-native-view-shot')
     implementation project(':react-native-vector-icons')

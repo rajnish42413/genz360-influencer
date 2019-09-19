@@ -1,12 +1,12 @@
 import React , {Component} from "react";
-import {ScrollView, View, Text, TextInput ,StyleSheet,RefreshControl,CheckBox ,FlatList ,TouchableOpacity ,Image,ImageBackground,ActivityIndicator,AsyncStorage} from "react-native";
+import {ScrollView,Share, Button, View, Text, TextInput ,RefreshControl,CheckBox ,TouchableOpacity ,Image,ImageBackground,ActivityIndicator,AsyncStorage} from "react-native";
 
 import * as Font from 'expo-font';
 import styles from './campStyle';
 import header from './headerStyle';
 
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -30,6 +30,10 @@ const Gallery = (props) => (
     <Image source={{uri:'http://www.genz360.com:81/get-image/'+props.item}} style={styles.img}/>
   </TouchableOpacity>
   );
+
+  const b64 =
+  'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+
 
 
 
@@ -103,6 +107,57 @@ _campaigns=async ()=>{
     }
   } catch (error) {
     alert(error);
+  }
+}
+
+onShare= async()=> {
+
+  try {
+    let img = 'http://www.genz360.com:81/get-image/'+this.state.campaign.image;
+    let url = 'data:image/jpeg;base64,' + img;
+
+    const result = await Share.share({
+      title: this.state.campaign.name,
+      message: this.state.campaign.desc ,
+      url:url
+    },
+      {
+        excludedActivityTypes: [
+          // 'com.apple.UIKit.activity.PostToWeibo',
+          // 'com.apple.UIKit.activity.Print',
+          // 'com.apple.UIKit.activity.CopyToPasteboard',
+          // 'com.apple.UIKit.activity.AssignToContact',
+          // 'com.apple.UIKit.activity.SaveToCameraRoll',
+          // 'com.apple.UIKit.activity.AddToReadingList',
+          // 'com.apple.UIKit.activity.PostToFlickr',
+          // 'com.apple.UIKit.activity.PostToVimeo',
+          // 'com.apple.UIKit.activity.PostToTencentWeibo',
+          // 'com.apple.UIKit.activity.AirDrop',
+          // 'com.apple.UIKit.activity.OpenInIBooks',
+          // 'com.apple.UIKit.activity.MarkupAsPDF',
+          // 'com.apple.reminders.RemindersEditorExtension',
+          // 'com.apple.mobilenotes.SharingExtension',
+          // 'com.apple.mobileslideshow.StreamShareService',
+          // 'com.linkedin.LinkedIn.ShareExtension',
+          // 'pinterest.ShareExtension',
+          // 'com.google.GooglePlus.ShareExtension',
+          // 'com.tumblr.tumblr.Share-With-Tumblr',
+          'net.whatsapp.WhatsApp.ShareExtension',
+        ],
+      });
+      
+  
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+    }
+  } catch (error) {
+    alert(error.message);
   }
 }
 
@@ -258,12 +313,16 @@ componentDidMount(){
         <ScrollView style={styles.container}>
 
                 <View style={styles.name_wrap}>
-                    <Text style={header.heading_normal}>{this.state.campaign.name}</Text>         
+                    <Text style={header.heading_normal}>{this.state.campaign.name}</Text>      
                 </View>
 
                 <View style={styles.desc_wrap}>
-                    <Text style={styles.desc_txt} selectable={true}>{this.state.campaign.desc}</Text>
+                    <Text style={styles.desc_txt} selectable={true}>{this.state.campaign.desc}</Text> 
                 </View>
+
+        <TouchableOpacity style={{backgroundColor:this.state.applied,marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} onPress={()=>this.onShare()}>
+          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Share</Text>
+        </TouchableOpacity>
 
                 
 
@@ -341,7 +400,7 @@ componentDidMount(){
                     {
                       this.state.imageData!==null && this.state.img && this.state.campaign.subtype==='4'
                       ?
-                      <Image source={this.state.imageSource} style={{height:200,width:200}} />:
+                      <Image source={this.state.imageSource} style={{height:auto,marginTop:10}} />:
                       null
                       }   
 
@@ -372,12 +431,3 @@ componentDidMount(){
     }
     }
   }
-
-
-
-
-
-
-
-
-
