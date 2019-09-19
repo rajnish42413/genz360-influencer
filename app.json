@@ -15,6 +15,7 @@
     },
     "android": {
       "package": "com.influencer",
+      "versionCode": 10,
       "permissions": [
         "CAMERA",
         "INTERNET",
