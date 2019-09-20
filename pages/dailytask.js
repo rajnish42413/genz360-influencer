@@ -1,11 +1,10 @@
 import React , {Component} from "react";
-import {ScrollView, View, Text, TextInput,ActivityIndicator ,StyleSheet ,FlatList ,TouchableOpacity ,Image,ImageBackground , Share,AsyncStorage} from "react-native";
+import {ScrollView, View, Text, TextInput,ActivityIndicator,Clipboard ,StyleSheet ,FlatList ,TouchableOpacity ,Image,ImageBackground , Share,AsyncStorage} from "react-native";
 
 
 import styles from './campStyle';
 import header from './headerStyle';
 import * as Font from 'expo-font';
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
@@ -65,7 +64,9 @@ onShare = async (url,type) => {
   }
   
  }
-
+ _setCaption(value) {
+  Clipboard.setString(value);
+}
 async _getStorageValue(){
   let value = await AsyncStorage.getItem("tokken");
   this.setState({tokken:value.toString()});
@@ -215,6 +216,10 @@ componentDidMount(){
                       <TouchableOpacity style={styles.share_btn} onPress={()=>this.onShare('http://www.genz360.com:81/get-image/'+this.state.taskdetails.file_name,2)} > 
                           <Text style={{fontSize:18,color:'#fff',fontFamily:'SF',textAlign:'center'}}>Share</Text>
                       </TouchableOpacity>
+                      {this.state.camp_data.caption!==null?
+                      <TouchableOpacity style={styles.share_btn} onPress={()=>this._setCaption(this.state.camp_data.caption)} > 
+                          <Text style={{fontSize:18,color:'#fff',fontFamily:'SF',textAlign:'center'}}>Copy Caption</Text>
+                      </TouchableOpacity>:null}
                   </View>
                 
                 }

@@ -2,7 +2,7 @@
   "name": "GenZ360",
   "displayName": "Genz360",
   "expo": {
-    "name": "Genz360_inf",
+    "name": "Genz360",
     "slug": "GenZ360_influencer_app",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
@@ -15,7 +15,7 @@
     },
     "android": {
       "package": "com.genz360_inf",
-      "versionCode": 11,
+      "versionCode": 12,
       "permissions": [
         "CAMERA",
         "INTERNET",

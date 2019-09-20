@@ -213,6 +213,7 @@ _submit_creative = async()=>{
     if (responseJson.valid){
       this.setState({loading:false})
       this.setState({applied:'green',applied_text:"Applied",status:true})
+      alert("Submitted successfully")
     }
     else{
       alert(responseJson.err);
@@ -395,7 +396,7 @@ componentDidMount(){
                     {
                       this.state.imageData!==null && this.state.img && this.state.campaign.subtype==='4'
                       ?
-                      <Image source={this.state.imageSource} style={{height:auto,marginTop:10}} />:
+                      <Image source={this.state.imageSource} style={{height:200,marginTop:10}} />:
                       null
                       }   
 
@@ -409,7 +410,7 @@ componentDidMount(){
         </ScrollView>
 
         {(this.state.campaign.subtype==='4' ||this.state.campaign.subtype==='6') && this.state.status ?<TouchableOpacity style={{backgroundColor:'blue',marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} onPress={()=>{this._submit_creative();this.setState({loading:true})}}>
-          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Submit Creative</Text>
+          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Submit</Text>
         </TouchableOpacity>:null
 }
 
