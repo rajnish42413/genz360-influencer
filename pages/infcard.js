@@ -5,7 +5,8 @@ import {
 import header from './headerStyle';
 import ViewShot , {captureRef} from 'react-native-view-shot';
 import * as Font from 'expo-font';
-
+import * as Sharing from 'expo-sharing';
+import * as FileSystem from 'expo-file-system';
 const shareOptions ={
     title:'Influencer Card',
     message:'This is my card',
@@ -91,31 +92,43 @@ onCapture= (uri)=> {
 
 
   uploadinfcard=async(imageData)=>{
-    try {
-      let response = await fetch('http://www.genz360.com:81/inf-gzid-wallet',{
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          tokken: this.props.navigation.state.params.tokken,
-          imageData:imageData
-        }),
-      });
+    let uri=FileSystem.documentDirectory+'infcard.jpg'
+    FileSystem.writeAsStringAsync(uri, imageData, {encoding:FileSystem.EncodingType.Base64})
+    Sharing.shareAsync(uri)
+    // try {
+    //   let response = await fetch('http://www.genz360.com:81/inf-gzid-wallet',{
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       tokken: this.props.navigation.state.params.tokken,
+    //       imageData:imageData
+    //     }),
+    //   });
       
-      let responseJson = await response.json();
+    //   let responseJson = await response.json();
   
-      if (responseJson.valid){
-        // alert(responseJson.msg)
-        this.onShare(responseJson.msg) 
-      }
-      else{
-        alert(responseJson.err);
-      }
-    } catch (error) {
-      alert(error);
-    }
+    //   if (responseJson.valid){
+    //     // alert(responseJson.msg)
+    //     FileSystem.downloadAsync(
+    //       responseJson.msg,
+    //   FileSystem.documentDirectory + 'cardshare.jpg'
+    // )
+    //   .then(({ uri }) => {
+    //     Sharing.shareAsync(uri)
+    //   })
+    //   .catch(error => {
+    //     alert(error)
+    //   });
+    //   }
+    //   else{
+    //     alert(responseJson.err);
+    //   }
+    // } catch (error) {
+    //   alert(error);
+    // }
   }
 
 

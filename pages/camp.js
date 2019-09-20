@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-import {ScrollView,Share, Button, View, Text, TextInput ,RefreshControl,CheckBox ,TouchableOpacity ,Image,ImageBackground,ActivityIndicator,AsyncStorage} from "react-native";
+import {ScrollView, Button,Linking, View, Text, TextInput ,RefreshControl,CheckBox ,TouchableOpacity ,Image,ImageBackground,ActivityIndicator,AsyncStorage} from "react-native";
 
 import * as Font from 'expo-font';
 import styles from './campStyle';
@@ -10,7 +10,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-
+// import * as Sharing from 'expo-sharing';
+// import * as FileSystem from 'expo-file-system';
+// import { url } from "inspector";
 // import ImagePicker from 'react-native-image-picker';
 const options = {
     title: 'Select Logo',
@@ -110,56 +112,47 @@ _campaigns=async ()=>{
   }
 }
 
-onShare= async()=> {
+// onShare= async()=> {
 
-  try {
-    let img = 'http://www.genz360.com:81/get-image/'+this.state.campaign.image;
-    let url = 'data:image/jpeg;base64,' + img;
+//   try {
+//     let img = 'http://www.genz360.com:81/get-image1/'+this.state.campaign.image;
+//     // let response = await fetch(img,{
+//     //   method: 'POST',
+//     //   headers: {
+//     //     Accept: 'application/json',
+//     //     'Content-Type': 'application/json',
+//     //   },
+//     //   body: JSON.stringify({
+//     //     tokken:this.state.tokken,
+//     //   }),
+//     // });
+    
+    
+//     // let responseJson = await response.json();
+//     // if (responseJson.valid){
+//     //   FileSystem.makeDirectoryAsync("file://genzdownloads")
+//     //   FileSystem.writeAsStringAsync('file://genzdownloads/genzshareimg',responseJson.inbase ,{encoding:FileSystem.EncodingType.Base64})
+//     //   Sharing.shareAsync('file://genzdownloads/genzshareimg')
+//     // }
+//     // else{
+//     //   alert(responseJson.err);
+//     // }
 
-    const result = await Share.share({
-      title: this.state.campaign.name,
-      message: this.state.campaign.desc ,
-      url:url
-    },
-      {
-        excludedActivityTypes: [
-          // 'com.apple.UIKit.activity.PostToWeibo',
-          // 'com.apple.UIKit.activity.Print',
-          // 'com.apple.UIKit.activity.CopyToPasteboard',
-          // 'com.apple.UIKit.activity.AssignToContact',
-          // 'com.apple.UIKit.activity.SaveToCameraRoll',
-          // 'com.apple.UIKit.activity.AddToReadingList',
-          // 'com.apple.UIKit.activity.PostToFlickr',
-          // 'com.apple.UIKit.activity.PostToVimeo',
-          // 'com.apple.UIKit.activity.PostToTencentWeibo',
-          // 'com.apple.UIKit.activity.AirDrop',
-          // 'com.apple.UIKit.activity.OpenInIBooks',
-          // 'com.apple.UIKit.activity.MarkupAsPDF',
-          // 'com.apple.reminders.RemindersEditorExtension',
-          // 'com.apple.mobilenotes.SharingExtension',
-          // 'com.apple.mobileslideshow.StreamShareService',
-          // 'com.linkedin.LinkedIn.ShareExtension',
-          // 'pinterest.ShareExtension',
-          // 'com.google.GooglePlus.ShareExtension',
-          // 'com.tumblr.tumblr.Share-With-Tumblr',
-          'net.whatsapp.WhatsApp.ShareExtension',
-        ],
-      });
-      
-  
-    if (result.action === Share.sharedAction) {
-      if (result.activityType) {
-        // shared with activity type of result.activityType
-      } else {
-        // shared
-      }
-    } else if (result.action === Share.dismissedAction) {
-      // dismissed
-    }
-  } catch (error) {
-    alert(error.message);
-  }
-}
+//     FileSystem.downloadAsync(
+//       'http://www.genz360.com:81/get-image/'+this.state.campaign.image,
+//       FileSystem.documentDirectory + 'share.jpg'
+//     )
+//       .then(({ uri }) => {
+//         Sharing.shareAsync(uri)
+//       })
+//       .catch(error => {
+//         alert(error)
+//       });
+   
+//   } catch (error) {
+//     alert(error.message);
+//   }
+// }
 
 _apply_for_campaign = async()=>{
   try {
@@ -235,7 +228,6 @@ async showpicker(){
   let result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
-    aspect: [4, 3],
     base64 :true
   });
   // alert(JSON.stringify(result.base64))
@@ -319,12 +311,15 @@ componentDidMount(){
                 <View style={styles.desc_wrap}>
                     <Text style={styles.desc_txt} selectable={true}>{this.state.campaign.desc}</Text> 
                 </View>
-
-        <TouchableOpacity style={{backgroundColor:this.state.applied,marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} onPress={()=>this.onShare()}>
-          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Share</Text>
-        </TouchableOpacity>
-
-                
+            {this.state.campaign.linktoshare!==null?
+        <TouchableOpacity style={{backgroundColor:this.state.applied,marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} 
+          onPress={()=>Linking.openURL(this.state.campaign.linktoshare)}>
+          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Open Link</Text>
+        </TouchableOpacity>:null
+            }
+                <View style={styles.os_wrap}>
+                <Text style={header.heading_normal}>Platform : {this.state.campaign.platform===0?'FaceBook':this.state.campaign.platform===1?'Instagram':this.state.campaign.platform===2?'YouTube':'Twitter'}</Text>
+              </View>
 
                <View style={styles.os_wrap}>
                 <Text style={header.heading_normal}>Status : {this.state.campaign.status===1?'Active':'Inactive'}</Text>

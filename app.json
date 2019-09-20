@@ -2,20 +2,20 @@
   "name": "GenZ360",
   "displayName": "Genz360",
   "expo": {
-    "name": "Genz360",
-    "slug": "GenZ360",
+    "name": "Genz360_inf",
+    "slug": "GenZ360_influencer_app",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "version": "8.1.1",
-    "icon": "./images/gi.png",
+    "version": "9.1.2",
+    "icon": "./images/logo.png",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "ios": {
       "bundleIdentifier": "com.genz360.influencer",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.influencer",
-      "versionCode": 10,
+      "package": "com.genz360_inf",
+      "versionCode": 11,
       "permissions": [
         "CAMERA",
         "INTERNET",

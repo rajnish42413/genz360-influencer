@@ -14,7 +14,7 @@ const Campaign = (props) => (
         <Text numberOfLines={1} ellipsizeMode={'tail'} style={{ fontSize: 16, color: '#000', fontFamily: 'Gilroy-ExtraBold',flex:0.7 }}>{props.item.name}</Text>
         <Text style={{fontFamily:'SF',fontSize:15,color:'#216583',flex:0.3}}>Know More</Text>
       </View>
-      <Text style={{ fontFamily: 'SF', color: '#000', fontSize: 16 }}></Text>
+      <Text style={{ fontFamily: 'SF', color: '#000', fontSize: 16 }}>{props.item.platform===0?'FaceBook':props.item.platform===1?'Instagram':props.item.platform===2?'YouTube':'Twitter'}</Text>
     </View>
   </TouchableOpacity>
 

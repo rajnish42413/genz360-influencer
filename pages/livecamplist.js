@@ -11,7 +11,7 @@ const Campaign = (props) => (
     <Image source={{uri:'http://www.genz360.com:81/get-image/'+props.item.image}} style={styles.camp_img} />
     <View style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 10 }}>
       <Text numberOfLines={1} ellipsizeMode={'tail'} style={{ fontSize: 16, color: '#000', fontFamily: 'Gilroy-ExtraBold' }}>{props.item.name}</Text>
-      <Text style={{ fontFamily: 'SF', color: '#000', fontSize: 16 }}></Text>
+      <Text style={{ fontFamily: 'SF', color: '#000', fontSize: 16 }}>{props.item.platform===0?'FaceBook':props.item.platform===1?'Instagram':props.item.platform===2?'YouTube':'Twitter'}</Text>
     </View>
   </TouchableOpacity>
 

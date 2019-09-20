@@ -169,7 +169,6 @@ async showpicker(){
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
       base64 :true
     });
     // alert(JSON.stringify(result.base64))

@@ -7,7 +7,8 @@ import header from './headerStyle';
 import * as Font from 'expo-font';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import * as Sharing from 'expo-sharing';
+import * as FileSystem from 'expo-file-system';
 
 const Gallery = (props) => (
   <View> 
@@ -46,10 +47,23 @@ export default class DailyTask extends Component {
     };
 }
 
-onShare = async (url) => {
-  const result = await Share.share({
-     message:url
-   });  
+onShare = async (url,type) => {
+  if(type===2){
+    FileSystem.downloadAsync(
+      url,
+      FileSystem.documentDirectory + 'share.jpg'
+    )
+      .then(({ uri }) => {
+        Sharing.shareAsync(uri)
+      })
+      .catch(error => {
+        alert(error)
+      });
+  }
+  else if(type===1){
+    Share.share({message:url})
+  }
+  
  }
 
 async _getStorageValue(){
@@ -142,12 +156,12 @@ componentDidMount(){
         <ScrollView style={styles.container}>
 
                 <View style={styles.name_wrap}>
-                    <Text style={{fontSize:16,color:'#808080',fontFamily:'SF-Regular'}}>DAILY TASK</Text>         
+                    <Text style={{fontSize:16,color:'#808080',fontFamily:'SF'}}>DAILY TASK</Text>         
                     <Text style={header.heading_normal}>{this.state.camp_data.name}</Text>         
                 </View>
 
                 <View style={styles.desc_wrap}>
-                <Text style={{fontSize:18,color:'#808080',fontFamily:'OpenSans-Bold',color:'#000'}}>Today's Task</Text>         
+                <Text style={{fontSize:18,color:'#808080',fontFamily:'Gilroy-ExtraBold',color:'#000'}}>Today's Task</Text>         
                     <Text style={styles.desc_txt}>
                     {this.state.taskdetails.desc}</Text>
                 </View>
@@ -186,7 +200,7 @@ componentDidMount(){
                   {this.state.taskdetails.post_data}
                   </Text>
                 </View>
-                <TouchableOpacity style={styles.share_btn} onPress={()=>this.onShare(this.state.taskdetails.post_data)} > 
+                <TouchableOpacity style={styles.share_btn} onPress={()=>this.onShare(this.state.taskdetails.post_data,1)} > 
                     <Text style={{fontSize:18,color:'#fff',fontFamily:'SF',textAlign:'center'}}>Share</Text>
                 </TouchableOpacity>
             </View>
@@ -198,7 +212,7 @@ componentDidMount(){
                         
                         <Image source={{uri:'http://www.genz360.com:81/get-image/'+this.state.taskdetails.file_name}} style={styles.img}/>
                       </View>
-                      <TouchableOpacity style={styles.share_btn} onPress={()=>this.onShare('http://www.genz360.com:81/get-image/'+this.state.taskdetails.file_name)} > 
+                      <TouchableOpacity style={styles.share_btn} onPress={()=>this.onShare('http://www.genz360.com:81/get-image/'+this.state.taskdetails.file_name,2)} > 
                           <Text style={{fontSize:18,color:'#fff',fontFamily:'SF',textAlign:'center'}}>Share</Text>
                       </TouchableOpacity>
                   </View>
@@ -207,7 +221,7 @@ componentDidMount(){
               </View>
                
         </ScrollView>
-        <Text style={{fontSize:18,color:'#808080',fontFamily:'OpenSans-Bold',marginLeft:20,color:'#000'}}>Task Update</Text>         
+        <Text style={{fontSize:18,color:'#808080',fontFamily:'Gilroy-ExtraBold',marginLeft:20,color:'#000'}}>Task Update</Text>         
 
         <View style={styles.text_input_wrap}>
             <TextInput placeholder="Enter Link of the post"
@@ -219,7 +233,7 @@ componentDidMount(){
         <TouchableOpacity style={{backgroundColor:'#f96d15',marginTop:20,marginLeft:20,marginRight:20,borderRadius:8,alignItems:'center',paddingTop:10,paddingBottom:10}} 
           onPress={()=>{this._submitlink()}}
         >
-          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF-Regular'}}>Submit Link</Text>
+          <Text style={{color:'#fff',fontSize:18,fontFamily:'SF'}}>Submit Link</Text>
         </TouchableOpacity>
 
         <View style={{paddingTop:20}}></View>
