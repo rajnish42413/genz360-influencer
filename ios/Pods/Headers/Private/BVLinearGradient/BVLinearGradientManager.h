@@ -1,1 +1,5 @@
-../../../../../node_modules/react-native-linear-gradient/BVLinearGradient/BVLinearGradientManager.h
+#import <React/RCTViewManager.h>
+
+@interface BVLinearGradientManager : RCTViewManager
+
+@end

@@ -10,7 +10,6 @@ target 'Influencer' do
     'DevSupport',
     'RCTActionSheet',
     'RCTAnimation',
-    'RCTBlob',
     'RCTGeolocation',
     'RCTImage',
     'RCTLinkingIOS',
@@ -40,7 +39,5 @@ target 'Influencer' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
-
-  pod 'RNShare', :path => '../node_modules/react-native-share'
 
 end

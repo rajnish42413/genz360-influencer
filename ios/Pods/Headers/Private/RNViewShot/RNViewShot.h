@@ -1,1 +1,7 @@
-../../../../../node_modules/react-native-view-shot/ios/RNViewShot.h
+
+#import <React/RCTBridgeModule.h>
+
+@interface RNViewShot : NSObject <RCTBridgeModule>
+
+@end
+  

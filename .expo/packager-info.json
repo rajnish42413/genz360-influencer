@@ -1,14 +1,9 @@
 {
-  "expoServerNgrokUrl": "https://3m-bdz.rajnish42413.genzinf.exp.direct",
-  "packagerNgrokUrl": "https://packager.3m-bdz.rajnish42413.genzinf.exp.direct",
-  "ngrokPid": 6792,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 2724,
-=======
-  "packagerPid": 2345,
->>>>>>> 425dd9d1daa45e39b575cf6b4ce0028951e40ff6
-  "webpackServerPort": null
+  "packagerPid": 1324,
+  "expoServerNgrokUrl": "https://3m-bdz.rajnish42413.genzinf.exp.direct",
+  "packagerNgrokUrl": "https://packager.3m-bdz.rajnish42413.genzinf.exp.direct",
+  "ngrokPid": 9232
 }

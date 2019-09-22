@@ -8,6 +8,17 @@
     "sdkVersion": "34.0.0",
     "version": "9.1.2",
     "icon": "./images/logo.png",
+    "splash": {
+      "image": "./images/gi.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "entryPoint": "node_modules/expo/AppEntry.js",
     "ios": {
       "bundleIdentifier": "com.genz360.influencer",
