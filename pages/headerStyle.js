@@ -1,12 +1,17 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet ,Platform} from 'react-native';
+import { Constants } from 'expo';
+
+navigationOptions:{
+  headerStyle:{
+    marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight }
+  }
 
 export default StyleSheet.create({
+
 
     header_wrapper:{
         backgroundColor:'#121b74',
     },
-
-    
 
     name:{
         fontFamily:'SF',

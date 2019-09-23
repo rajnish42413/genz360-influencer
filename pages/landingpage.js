@@ -103,18 +103,6 @@ export default class Landingpage extends Component{
             activeDot={<View style={{backgroundColor: '#fff', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7}}            />}
                loop={false}
           >
-          <View style={styles.slide1}>
-            <Image source={require('./cashconnect.png')} style={styles.image}/>
-          </View>
-          <View style={styles.slide3}>
-          <Image source={require('./speakrfinal.png')} style={styles.image}/>
-            
-          </View>
-          <View style={[styles.slide2,{flexDirection:'column'}]}>
-          <Image source={require('./entr.png')} style={styles.image}/>
-
-
-          </View>
          
           <View style={{flex:1,backgroundColor:'#241663'}}>
               <View sytle={styles.slide}>
