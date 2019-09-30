@@ -6,7 +6,7 @@
     "slug": "GenZ360_influencer_app",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
-    "version": "9.1.2",
+    "version": "9.1.3",
     "icon": "./images/logo.png",
     "splash": {
       "image": "./images/gi.png",
